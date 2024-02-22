@@ -37,3 +37,6 @@
 ​
 ## 使用素材
 検討中
+
+## 実装機能リスト
+https://docs.google.com/spreadsheets/d/1_2aC2--PGYZ-7c5rBC7mRd2oAbLI-w5yNKmnDny057I/edit?usp=sharing
