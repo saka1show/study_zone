@@ -1,0 +1,16 @@
+<h2>マイページ</h2>
+
+ニックネーム　<%= @learner.name %></br>
+
+<%= link_to "登録情報の変更", edit_learner_path(@learner) %></br>
+
+ステータス</br>
+現在のレベル　未実装</br>
+（次のレベルまで　未実装　）</br>
+
+今日のポイント　p</br>
+今月のポイント　p</br>
+累計獲得ポイント　p</br>
+
+<%= link_to "ポイント獲得履歴", points_path %>
+

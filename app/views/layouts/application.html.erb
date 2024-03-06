@@ -18,7 +18,7 @@
             <% if admin_signed_in? %>
               <%= link_to "Study Zone", "/admin", class:"nav-link h2 text-primary" %>
             <% elsif learner_signed_in? %>
-              <%= link_to "Study Zone", "/learner", class:"nav-link h2 text-primary" %>
+              <%= link_to "Study Zone", "/learners", class:"nav-link h2 text-primary" %>
             <% else %>
               <%= link_to "Study Zone", "/", class:"nav-link h2 text-primary" %>
             <% end %>
@@ -35,20 +35,56 @@
           </div>
           <ul class="navbar-nav ml-auto flex-row">
             <% if admin_signed_in? %>
-              <li class="nav-item"><%= link_to "マイページ", admin_items_path, class:'btn btn-outline-secondary', role:'button' %></li>
-              　<li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:'btn btn-outline-secondary', role:'button' %></li>
+              <li class="nav-item"><%= link_to "マイページ", admin_admin_path(current_admin), class:'btn bg-white text-info', role:'button' %></li>
+              　<li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:'btn bg-white text-info', role:'button' %></li>
             <% elsif learner_signed_in? %>
-              <li class="nav-item"><%= link_to "マイページ", customers_my_page_path, class:'btn btn-outline-secondary', role:'button' %></li>
-              　<li class="nav-item"><%= link_to "ログアウト", destroy_learner_session_path, method: :delete, class:'btn btn-outline-secondary', role:'button' %></li>
+              <li class="nav-item"><%= link_to "マイページ", learner_path(current_learner), class:'btn bg-white text-info', role:'button' %></li>
+              　<li class="nav-item"><%= link_to "ログアウト", destroy_learner_session_path, method: :delete, class:'btn bg-white text-info', role:'button' %></li>
             <% else %>
-              　<li class="nav-item"><%= link_to "ログイン", learner_session_path, class:'btn btn-outline-secondary', role:'button' %></li>
+              　<li class="nav-item"><%= link_to "ログイン", learner_session_path, class:'btn bg-white text-info', role:'button' %></li>
             <% end %>
           </ul>
         </div>
       </nav>
 
     </header>
-    <%= yield %>
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="sidebar bg-secondary">
+
+
+          サイドバー左</br>
+            <% if admin_signed_in? %>
+              <li><%= link_to "問題を投稿する" %> </li>
+            <% elsif learner_signed_in? %>
+              <%= link_to "問題を投稿する", new_createdproblem_path, class:'btn bg-white text-info', role:'button' %></br>
+              <%= link_to "投稿した問題一覧", createdproblem_path(current_learner), class:'btn bg-white text-info', role:'button' %></br>
+              <%= link_to "解いた問題一覧", solvedproblems_path(current_learner), class:'btn bg-white text-info', role:'button' %></br>
+              <%= link_to "みんなの問題一覧", createdproblems_all_path, class:'btn bg-white text-info', role:'button' %>
+            <% else %>
+              <li class="nav-item"><%= link_to "ログイン", learner_session_path, class:'btn btn-outline-secondary', role:'button' %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <%= yield %>
+      </div>
+      <div class="col-lg-3">
+        <div class="sidebar bg-secondary">
+          サイドバー右
+
+          <% if admin_signed_in? %>
+            <li class="nav-item"><%= link_to "マイページ", admin_admin_path(current_admin), class:'btn btn-outline-secondary', role:'button' %></li>
+            <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:'btn btn-outline-secondary', role:'button' %></li>
+          <% elsif learner_signed_in? %>
+            <li class="nav-item"><%= link_to "マイページ", learner_path(current_learner), class:'btn btn-outline-secondary', role:'button' %></li>
+            <li class="nav-item"><%= link_to "ログアウト", destroy_learner_session_path, method: :delete, class:'btn btn-outline-secondary', role:'button' %></li>
+          <% else %>
+            <li class="nav-item"><%= link_to "ログイン", learner_session_path, class:'btn btn-outline-secondary', role:'button' %></li>
+          <% end %>
+        </div>
+      </div>
     <footer>
 
     </footer>

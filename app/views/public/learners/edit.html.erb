@@ -1,0 +1,19 @@
+<h2>登録情報変更画面</h2>
+
+<%= form_with model: @learner, url: learner_path, method: :patch do |f| %>
+
+ニックネーム
+<%= f.text_field :name %>
+
+ニックネーム　よみがな
+<%= f.text_field :name_kana %>
+
+メールアドレス
+<%= f.email_field :email %>
+
+<%= f.submit "変更する" %>
+
+<% end %>
+
+
+退会を希望する方は<%= link_to "こちら", learners_unsubscribe_path %>

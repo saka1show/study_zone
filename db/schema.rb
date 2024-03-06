@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_02_28_051758) do
+ActiveRecord::Schema.define(version: 2024_03_01_044826) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,6 +23,32 @@ ActiveRecord::Schema.define(version: 2024_02_28_051758) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "learner_id", null: false
+    t.integer "solved_problem_id", null: false
+    t.text "comment", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "created_problems", force: :cascade do |t|
+    t.integer "learner_id", null: false
+    t.integer "subject_id", null: false
+    t.text "problem", null: false
+    t.text "model_answer", null: false
+    t.text "explanation", null: false
+    t.boolean "is_release", default: true, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "goods", force: :cascade do |t|
+    t.integer "learner_id", null: false
+    t.integer "created_problem_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "learners", force: :cascade do |t|
@@ -38,6 +64,30 @@ ActiveRecord::Schema.define(version: 2024_02_28_051758) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_learners_on_email", unique: true
     t.index ["reset_password_token"], name: "index_learners_on_reset_password_token", unique: true
+  end
+
+  create_table "points", force: :cascade do |t|
+    t.integer "learner_id", null: false
+    t.integer "solved_problem_id", null: false
+    t.integer "point", null: false
+    t.boolean "type", default: true, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "solved_problems", force: :cascade do |t|
+    t.integer "learner_id", null: false
+    t.integer "created_problem_id", null: false
+    t.text "answer", null: false
+    t.boolean "answer_status", default: true, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "subject_namem", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

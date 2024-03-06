@@ -1,0 +1,18 @@
+<h2>問題新規投稿</h2>
+<%= form_with model: @created_problem, url: admin_createdproblems_path do |f| %>
+  教科</br>
+  <%= f.text_field :subject %></br>
+
+  問題</br>
+  <%= f.text_field :problem %></br>
+
+  模範解答</br>
+  <%= f.text_field :model_answer %></br>
+
+  解説</br>
+  <%= f.text_field :explanation %></br>
+
+  <%= f.submit "投稿する" %>
+
+<% end %>
+

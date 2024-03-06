@@ -1,0 +1,4 @@
+<h2>退会確認画面</h2>
+本当に退会しますか？
+<%= link_to "いいえ", learner_path(current_learner) %>
+<%= link_to "退会する", learners_withdraw_path, method: :patch, class:"btn btn-danger" %>
