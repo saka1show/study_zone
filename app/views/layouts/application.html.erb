@@ -58,7 +58,7 @@
               <li><%= link_to "問題を投稿する" %> </li>
             <% elsif learner_signed_in? %>
               <%= link_to "問題を投稿する", new_createdproblem_path, class:'btn bg-white text-info', role:'button' %></br>
-              <%= link_to "投稿した問題一覧", createdproblem_path(current_learner), class:'btn bg-white text-info', role:'button' %></br>
+              <%= link_to "投稿した問題一覧", createdproblems_path, class:'btn bg-white text-info', role:'button' %></br>
               <%= link_to "解いた問題一覧", solvedproblems_path(current_learner), class:'btn bg-white text-info', role:'button' %></br>
               <%= link_to "みんなの問題一覧", createdproblems_all_path, class:'btn bg-white text-info', role:'button' %>
             <% else %>
