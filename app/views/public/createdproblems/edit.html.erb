@@ -1,0 +1,23 @@
+<h2>投稿問題編集</h2>
+
+<%= form_with model: @created_problem, url: createdproblem_path do |f| %>
+  教科</br>
+  <%= f.text_field :subject_id %></br>
+
+  問題</br>
+  <%= f.text_field :problem %></br>
+
+  模範解答</br>
+  <%= f.text_field :model_answer %></br>
+
+  解説</br>
+  <%= f.text_field :explanation %></br>
+
+  公開ステータス</br>
+  ステータス</br>
+
+  <%= f.submit "更新する" %>
+
+<% end %>
+
+<%= link_to "削除する", createdproblem_path, method: :delete %>

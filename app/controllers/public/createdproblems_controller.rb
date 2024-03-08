@@ -42,6 +42,8 @@ class Public::CreatedproblemsController < ApplicationController
 
   def destroy
     @created_problem = CreatedProblem.find(params[:id])
+    @created_problem.destroy
+    redirect_to createdproblems_path
   end
 
 

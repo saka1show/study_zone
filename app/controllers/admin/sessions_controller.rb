@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::SessionsController < Devise::SessionsController
-  before_action :configure_sign_in_params, only: [:create]
+  before_action :admin_state, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -28,8 +28,14 @@ class Admin::SessionsController < Devise::SessionsController
 
   # protected
 
-  def configure_sign_in_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :encrypted_password])
+  def admin_state
+    admin = Admin.find_by(email: params[:admin][:email])
+    return if admin.nil?
+    return unless admin.valid_password?(params[:admin][:password])
+    if admin.is_active == false
+      redirect_to new_admin_registration_path
+    else
+    end
   end
 
   # If you have extra params to permit, append them to the sanitizer.

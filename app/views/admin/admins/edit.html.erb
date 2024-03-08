@@ -1,0 +1,16 @@
+<h2>管理者登録情報変更</h2>
+
+<%= form_with model: @admin, url: admin_admin_path, method: :patch do |f| %>
+
+管理者名
+<%= f.text_field :name %>
+
+メールアドレス
+<%= f.email_field :email %>
+
+<%= f.submit "変更する" %>
+
+<% end %>
+
+
+退会を希望する方は<%= link_to "こちら", admin_admin_unsubscribe_path %>
