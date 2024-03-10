@@ -1,0 +1,26 @@
+<h2>投稿問題編集</h2>
+
+<%= form_with model: @created_problem, url: admin_createdproblem_path do |f| %>
+  教科</br>
+  <%= f.select :subject_id, options_from_collection_for_select(Subject.all, :id, :subject_name, @created_problem.subject_id) %></br>
+
+  問題</br>
+  <%= f.text_field :problem %></br>
+
+  模範解答</br>
+  <%= f.text_field :model_answer %></br>
+
+  解説</br>
+  <%= f.text_field :explanation %></br>
+
+  公開ステータス</br>
+  <%= f.radio_button :is_release, true %>
+        <%= f.label :is_release, "公開中にする" %>
+        　<%= f.radio_button :is_release, false %>
+        <%= f.label :is_release, "非公開にする" %></br>
+
+  <%= f.submit "更新する" %>
+
+<% end %>
+
+<%= link_to "削除する", admin_createdproblem_path, method: :delete %>

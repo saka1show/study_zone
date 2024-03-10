@@ -1,4 +1,5 @@
 <h2>投稿問題一覧画面</h2>
+ <% if learner_signed_in? %>
 <table class="table table-hover table-inverse">
   <tr>
     <th>教科</th>
@@ -10,9 +11,18 @@
       <tr>
         <td><%= created_problem.subject.subject_name %></td>
         <td><%= created_problem.problem %></td>
-        <td>ステータス</td>
+        <td><% if created_problem.is_release == true %>
+    公開中</br>
+  <% else %>
+    非公開中</br>
+  <% end %></td>
         <td><%= link_to "詳細", createdproblem_path(created_problem.id) %></td>
       </tr>
     <% end %>
   <% end %>
 </table>
+<% else %>
+問題の投稿した問題一覧機能はログイン後に利用可能です。</br>
+ログインはこちら</br>
+新規登録はこちら
+<% end %>

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     patch "/admin/withdraw" => 'admins#withdraw'
     resources :admins, only: [:show, :edit, :update]
     resources :learners, only: [:index, :show, :edit, :update, :destroy]
+    resources :subjects, only: [:new, :create, :index, :edit, :update]
     resources :points, only: [:index, :show, :edit, :update]
     resources :createdproblems, only: [:index, :show, :edit, :update, :destroy]
   end

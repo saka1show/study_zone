@@ -3,12 +3,18 @@
 ニックネーム</br>
 <%= @learner.name %>さん</br>
 
-ステータス</br>
+ステータス
+<% if @learner.is_active == true %>
+    有効会員</br>
+  <% else %>
+    退会済</br>
+  <% end %>
 現在のレベル　未実装</br>
 累計獲得ポイント　p</br>
 
-<%= @learner.name %></br>
-<%= @learner.name %>さんが作成した最新問題</br>
+<%= link_to "学習者情報の編集", edit_admin_learner_path(@learner.id) %>
+
+<%= @learner.name %></br>さんが作成した最新問題</br>
 <table class="table table-hover table-inverse">
   <tr>
     <th>教科</th>
@@ -20,7 +26,7 @@
     <tr>
       <td><%= created_problem.subject.subject_name %></td>
       <td><%= created_problem.problem %></td>
-      <td>編集</td>
+      <td><%= link_to "詳細", admin_createdproblem_path(created_problem.id) %></td>
     </tr>
     <% end %>
   <% end %>

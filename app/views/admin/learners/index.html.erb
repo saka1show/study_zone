@@ -12,7 +12,11 @@
     <tr>
       <td><%= learner.id %></td>
       <td><%= learner.name %></td>
-      <td>ステータス</td>
+      <td><% if learner.is_active == true %>
+    有効会員</br>
+  <% else %>
+    退会済</br>
+  <% end %></br></td>
       <td><%= link_to "詳細", admin_learner_path(learner.id) %></td>
     </tr>
     <% end %>

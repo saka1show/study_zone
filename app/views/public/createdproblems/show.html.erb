@@ -4,9 +4,18 @@
 問題　<%= @created_problem.problem %></br>
 模範解答　<%= @created_problem.model_answer %></br>
 解説　<%= @created_problem.explanation %></br>
+公開ステータス
+  <% if @created_problem.is_release == true %>
+    公開中</br>
+  <% else %>
+    非公開中</br>
+  <% end %>
 投稿日時　<%= @created_problem.created_at %></br>
 獲得ポイント　未実装</br>
 いいね数　未実装</br>
 
-<%= link_to "編集する", edit_createdproblem_path %></br>
-<%= link_to "解いてくれた人にコメントする" %>
+<% if @created_problem.learner_id == current_learner.id %>
+  <%= link_to "編集する", edit_createdproblem_path %></br>
+  <%= link_to "解いてくれた人にコメントする" %>
+<% else %>
+<% end %>

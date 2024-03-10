@@ -20,7 +20,7 @@ class Admin::LearnersController < ApplicationController
   end
 
   def learner_params
-    params.require(:learner).permit(:name, :name_kana, :email)
+    params.require(:learner).permit(:name, :name_kana, :email, :is_active)
   end
 
 end

@@ -10,15 +10,24 @@
     <th>ステータス</th>
     <th></th>
   </tr>
-  <% @created_problems.each_slice(5) do |row| %>
+  <% @created_problems.each_slice(10) do |row| %>
     <% row.each do |created_problem| %>
     <tr>
       <td><%= created_problem.learner.name %></td>
       <td><%= created_problem.subject.subject_name %></td>
       <td><%= created_problem.problem %></td>
-      <td>ステータス</td>
-      <td>詳細</td>
+      <td><% if created_problem.is_release == true %>
+    公開中</br>
+  <% else %>
+    非公開中</br>
+  <% end %></td>
+      <td>
+      <% if learner_signed_in? %>
+        <%= link_to "詳細", createdproblem_path(created_problem.id) %></td>
+      <% else %>
+      <% end %>
     </tr>
     <% end %>
   <% end %>
+  <%= paginate @created_problems %>
 </table>

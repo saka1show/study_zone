@@ -2,7 +2,7 @@
 
 <%= form_with model: @created_problem, url: createdproblem_path do |f| %>
   教科</br>
-  <%= f.text_field :subject_id %></br>
+  <%= f.select :subject_id, options_from_collection_for_select(Subject.all, :id, :subject_name, @created_problem.subject_id) %></br>
 
   問題</br>
   <%= f.text_field :problem %></br>
@@ -14,7 +14,10 @@
   <%= f.text_field :explanation %></br>
 
   公開ステータス</br>
-  ステータス</br>
+   <%= f.radio_button :is_release, true %>
+        <%= f.label :is_release, "公開中にする" %>
+        　<%= f.radio_button :is_release, false %>
+        <%= f.label :is_release, "非公開にする" %></br>
 
   <%= f.submit "更新する" %>
 

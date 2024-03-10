@@ -1,0 +1,22 @@
+<h2>学習者登録情報変更</h2>
+
+<%= form_with model: @learner, url: admin_learner_path, method: :patch do |f| %>
+
+ニックネーム
+<%= f.text_field :name %>
+
+ニックネーム　よみがな
+<%= f.text_field :name_kana %>
+
+メールアドレス
+<%= f.email_field :email %>
+
+ステータス
+　<%= f.radio_button :is_active, true %>
+        <%= f.label :is_active, "有効化" %>
+        　<%= f.radio_button :is_active, false %>
+        <%= f.label :is_active, "退会処理" %>
+
+<%= f.submit "変更する" %>
+
+<% end %>s

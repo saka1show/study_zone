@@ -16,11 +16,14 @@ class Public::CreatedproblemsController < ApplicationController
   end
 
   def index
-    @created_problems = CreatedProblem.where(learner_id: current_learner.id)
+    if learner_signed_in?
+      @created_problems = CreatedProblem.where(learner_id: current_learner.id)
+    else
+    end
   end
 
   def index_all
-    @created_problems = CreatedProblem.all
+    @created_problems = CreatedProblem.page(params[:page])
   end
 
   def show

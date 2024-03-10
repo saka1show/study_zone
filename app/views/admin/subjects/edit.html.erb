@@ -1,6 +1,12 @@
-<h2>みんなの問題一覧</h2>
+<h2>教科編集</h2>
 
-投稿された最新問題</br>
+<%= form_with model: @subject, url: admin_subject_path, method: :patch do |f| %>
+  教科</br>
+  <%= f.text_field :subject_name %></br>
+
+  <%= f.submit "更新する" %>
+
+<% end %>
 
 <table class="table table-hover table-inverse">
   <tr>
@@ -16,12 +22,8 @@
       <td><%= created_problem.learner.name %></td>
       <td><%= created_problem.subject.subject_name %></td>
       <td><%= created_problem.problem %></td>
-      <td>  <% if created_problem.is_release == true %>
-    公開中</br>
-  <% else %>
-    非公開中</br>
-  <% end %></td>
-      <td><%= link_to "詳細", admin_createdproblem_path(created_problem.id) %></td>
+      <td>ステータス</td>
+      <td>解く</td>
     </tr>
     <% end %>
   <% end %>

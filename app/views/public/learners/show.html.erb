@@ -4,7 +4,11 @@
 
 <%= link_to "登録情報の変更", edit_learner_path(@learner) %></br>
 
-ステータス</br>
+ステータス　<% if @learner.is_active == true %>
+    有効会員</br>
+  <% else %>
+    退会済</br>
+  <% end %></br>
 現在のレベル　未実装</br>
 （次のレベルまで　未実装　）</br>
 

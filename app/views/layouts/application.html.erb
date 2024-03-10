@@ -56,6 +56,7 @@
           サイドバー左</br>
             <% if admin_signed_in? %>
               <%= link_to "学習者一覧", admin_learners_path, class:'btn bg-white text-info', role:'button' %></br>
+              <%= link_to "教科一覧・編集", admin_subjects_path, class:'btn bg-white text-info', role:'button' %></br>
               <%= link_to "みんなの問題一覧", admin_createdproblems_path, class:'btn bg-white text-info', role:'button' %>
             <% elsif learner_signed_in? %>
               <%= link_to "問題を投稿する", new_createdproblem_path, class:'btn bg-white text-info', role:'button' %></br>
@@ -63,9 +64,16 @@
               <%= link_to "解いた問題一覧", solvedproblems_path(current_learner), class:'btn bg-white text-info', role:'button' %></br>
               <%= link_to "みんなの問題一覧", createdproblems_all_path, class:'btn bg-white text-info', role:'button' %>
             <% else %>
-              <li class="nav-item"><%= link_to "ログイン", learner_session_path, class:'btn btn-outline-secondary', role:'button' %></li>
+              <%= link_to "問題を投稿する", new_createdproblem_path, class:'btn bg-white text-info', role:'button' %></br>
+              <%= link_to "投稿した問題一覧", createdproblems_path, class:'btn bg-white text-info', role:'button' %></br>
+              <%= link_to "解いた問題一覧", solvedproblems_path(current_learner), class:'btn bg-white text-info', role:'button' %></br>
+              <%= link_to "みんなの問題一覧", createdproblems_all_path, class:'btn bg-white text-info', role:'button' %>
             <% end %>
-          </ul>
+            
+            投稿された最新問題
+            作問者
+            教科
+            
         </div>
       </div>
       <div class="col-lg-6">
