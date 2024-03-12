@@ -69,11 +69,14 @@
               <%= link_to "解いた問題一覧", solvedproblems_path(current_learner), class:'btn bg-white text-info', role:'button' %></br>
               <%= link_to "みんなの問題一覧", createdproblems_all_path, class:'btn bg-white text-info', role:'button' %>
             <% end %>
-            
-            投稿された最新問題
-            作問者
-            教科
-            
+            </br>
+            </br>
+            投稿された最新問題</br>
+            <%= CreatedProblem.order(created_at: :desc).first.problem %></br>
+            作問者</br>
+            <%= CreatedProblem.order(created_at: :desc).first.learner.name %></br>
+            教科</br>
+            <%= CreatedProblem.order(created_at: :desc).first.subject.subject_name %>
         </div>
       </div>
       <div class="col-lg-6">

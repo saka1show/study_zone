@@ -16,14 +16,29 @@ class Public::CreatedproblemsController < ApplicationController
   end
 
   def index
+    @subjects = Subject.all
     if learner_signed_in?
-      @created_problems = CreatedProblem.where(learner_id: current_learner.id)
+      if params[:problem].present? && params[:subject_name].present?  && params[:is_release].present?
+        @created_problems = CreatedProblem.joins(:subject).where("problem LIKE ?", "%#{params[:problem]}%").where(subjects: { subject_name: params[:subject_name]}).where(is_release: params[:is_release]).where(learner_id: current_learner.id).order(created_at: :desc)
+      elsif params[:problem].present?
+        @created_problems = CreatedProblem.where("problem LIKE ?", "%#{params[:problem]}%").where(learner_id: current_learner.id).order(created_at: :desc)
+      elsif params[:subject_name].present?
+        @created_problems = CreatedProblem.joins(:subject).where(subjects: { subject_name: params[:subject_name] }).where(learner_id: current_learner.id).order(created_at: :desc)
+      elsif params[:is_release].present?
+        @created_problems = CreatedProblem.where(is_release: params[:is_release]).where(learner_id: current_learner.id).order(created_at: :desc)
+      else
+        @created_problems = CreatedProblem.where(learner_id: current_learner.id).order(created_at: :desc)
+      end
     else
     end
   end
 
   def index_all
-    @created_problems = CreatedProblem.page(params[:page])
+    if params[:problem].present?
+      @created_problems = CreatedProblem.where("problem LIKE ?", "%#{params[:problem]}%").page(params[:page]).order(created_at: :desc)
+    else
+      @created_problems = CreatedProblem.page(params[:page]).order(created_at: :desc)
+    end
   end
 
   def show

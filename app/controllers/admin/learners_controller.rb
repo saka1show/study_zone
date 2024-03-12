@@ -6,7 +6,7 @@ class Admin::LearnersController < ApplicationController
 
   def show
     @learner = Learner.find(params[:id])
-    @created_problem = CreatedProblem.where(learner_id: @learner.id)
+    @created_problem = CreatedProblem.where(learner_id: @learner.id).order(created_at: :desc)
   end
 
   def edit

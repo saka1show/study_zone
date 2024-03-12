@@ -1,7 +1,7 @@
 class Admin::CreatedproblemsController < ApplicationController
 
   def index
-    @created_problems = CreatedProblem.all
+    @created_problems = CreatedProblem.all.order(created_at: :desc)
   end
 
   def show

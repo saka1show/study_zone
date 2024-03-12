@@ -19,7 +19,7 @@ class Admin::SubjectsController < ApplicationController
 
   def edit
     @subject = Subject.find(params[:id])
-    @created_problems = CreatedProblem.where(subject_id: @subject.id)
+    @created_problems = CreatedProblem.where(subject_id: @subject.id).order(created_at: :desc)
   end
 
   def update
