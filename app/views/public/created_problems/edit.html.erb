@@ -1,6 +1,6 @@
 <h2>投稿問題編集</h2>
 
-<%= form_with model: @created_problem, url: createdproblem_path do |f| %>
+<%= form_with model: @created_problem, url: created_problem_path do |f| %>
   教科</br>
   <%= f.select :subject_id, options_from_collection_for_select(Subject.all, :id, :subject_name, @created_problem.subject_id) %></br>
 
@@ -23,4 +23,4 @@
 
 <% end %>
 
-<%= link_to "削除する", createdproblem_path, method: :delete %>
+<%= link_to "削除する", created_problem_path, method: :delete %>

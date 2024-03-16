@@ -24,16 +24,17 @@ Rails.application.routes.draw do
     get "/learners" => 'homes#top'
     get "/learners/unsubscribe" => 'learners#unsubscribe'
     patch "/learners/withdraw" => 'learners#withdraw'
-    get "/createdproblems/all" => 'createdproblems#index_all'
-    post "/solvedproblems/answer" => 'learners#answer'
-    get "/solvedproblems/answer_check" => 'learners#answer_check'
-    get "/solvedproblems/correct" => '/learners#correct'
-    get "/solvedproblems/incorrect" => '/learners#incorrect'
+    get "/created_problems/all" => 'created_problems#index_all'
+    post "/solved_problems/answer" => 'solved_problems#answer'
+    post "/solved_problems/correct" => 'solved_problems#correct'
+    get "/solved_problems/correct_page" => 'solved_problems#correct_page'
+    post "/solved_problems/incorrect" => 'solved_problems#incorrect'
+    get "/solved_problems/incorrect_page" => 'solved_problems#incorrect_page'
 
     resources :learners, only: [:show, :edit, :update]
     resources :points, only: [:index, :show]
-    resources :createdproblems, only: [:new, :create, :index, :show, :edit, :update, :destroy]
-    resources :solvedproblems, only: [:new, :create, :index]
+    resources :created_problems, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :solved_problems, only: [:new, :index, :destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

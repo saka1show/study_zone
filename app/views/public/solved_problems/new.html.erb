@@ -1,0 +1,19 @@
+<% if SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner.id) %>
+
+  この問題は解答済みです。</br>
+  もう一度解く場合は、こちらから削除してください。
+
+<% else %>
+
+<h2>解答画面</h2>
+
+  問題</br>
+  <%= @created_problem.problem %>
+
+  <%= form_with model: @solved_problem, url: solved_problems_answer_path(created_problem_id: @created_problem.id), method: :post do |f| %>
+    解答</br>
+    <%= f.text_field :answer %></br>
+    <%= f.submit "解答する" %>
+  <% end %>
+
+<% end %>

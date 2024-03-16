@@ -1,0 +1,23 @@
+<h2>解答確認</h2>
+
+あなたの解答<br>
+<%= @solved_problem.answer %></br>
+
+模範解答</br>
+<%= @created_problem.model_answer %></br>
+
+  <%= form_with model: @solved_problem, url: solved_problems_correct_path do |f| %>
+    <%= f.hidden_field :learner_id, :value => current_learner.id %>
+    <%= f.hidden_field :created_problem_id, :value => @created_problem.id %>
+    <%= f.hidden_field :answer , :value => @solved_problem.answer %>
+    <%= f.hidden_field :answer_status , :value => true %>
+    <input class="btn btn-success" type="submit" value="正解した">
+  <% end %>
+
+　　<%= form_with model: @solved_problem, url: solved_problems_incorrect_path do |f| %>
+      <%= f.hidden_field :learner_id, :value => current_learner.id %>
+      <%= f.hidden_field :created_problem_id, :value => @created_problem.id %>
+      <%= f.hidden_field :answer , :value => @solved_problem.answer %>
+      <%= f.hidden_field :answer_status , :value => false %>
+      <input class="btn btn-danger" type="submit" value="不正解だった">
+    <% end %>

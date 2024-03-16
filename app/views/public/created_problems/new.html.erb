@@ -1,6 +1,6 @@
 <h2>問題新規投稿</h2>
  <% if learner_signed_in? %>
-<%= form_with model: @created_problem, url: createdproblems_path, method: :post do |f| %>
+<%= form_with model: @created_problem, url: created_problems_path, method: :post do |f| %>
   教科</br>
   <%= f.select :subject_id, options_from_collection_for_select(Subject.all, :id, :subject_name) %></br>
 

@@ -57,17 +57,17 @@
             <% if admin_signed_in? %>
               <%= link_to "学習者一覧", admin_learners_path, class:'btn bg-white text-info', role:'button' %></br>
               <%= link_to "教科一覧・編集", admin_subjects_path, class:'btn bg-white text-info', role:'button' %></br>
-              <%= link_to "みんなの問題一覧", admin_createdproblems_path, class:'btn bg-white text-info', role:'button' %>
+              <%= link_to "みんなの問題一覧", admin_created_problems_path, class:'btn bg-white text-info', role:'button' %>
             <% elsif learner_signed_in? %>
-              <%= link_to "問題を投稿する", new_createdproblem_path, class:'btn bg-white text-info', role:'button' %></br>
-              <%= link_to "投稿した問題一覧", createdproblems_path, class:'btn bg-white text-info', role:'button' %></br>
-              <%= link_to "解いた問題一覧", solvedproblems_path(current_learner), class:'btn bg-white text-info', role:'button' %></br>
-              <%= link_to "みんなの問題一覧", createdproblems_all_path, class:'btn bg-white text-info', role:'button' %>
+              <%= link_to "問題を投稿する", new_created_problem_path, class:'btn bg-white text-info', role:'button' %></br>
+              <%= link_to "投稿した問題一覧", created_problems_path, class:'btn bg-white text-info', role:'button' %></br>
+              <%= link_to "解いた問題一覧", solved_problems_path(current_learner), class:'btn bg-white text-info', role:'button' %></br>
+              <%= link_to "みんなの問題一覧", created_problems_all_path, class:'btn bg-white text-info', role:'button' %>
             <% else %>
-              <%= link_to "問題を投稿する", new_createdproblem_path, class:'btn bg-white text-info', role:'button' %></br>
-              <%= link_to "投稿した問題一覧", createdproblems_path, class:'btn bg-white text-info', role:'button' %></br>
-              <%= link_to "解いた問題一覧", solvedproblems_path(current_learner), class:'btn bg-white text-info', role:'button' %></br>
-              <%= link_to "みんなの問題一覧", createdproblems_all_path, class:'btn bg-white text-info', role:'button' %>
+              <%= link_to "問題を投稿する", new_created_problem_path, class:'btn bg-white text-info', role:'button' %></br>
+              <%= link_to "投稿した問題一覧", created_problems_path, class:'btn bg-white text-info', role:'button' %></br>
+              <%= link_to "解いた問題一覧", solved_problems_path(current_learner), class:'btn bg-white text-info', role:'button' %></br>
+              <%= link_to "みんなの問題一覧", created_problems_all_path, class:'btn bg-white text-info', role:'button' %>
             <% end %>
             </br>
             </br>
