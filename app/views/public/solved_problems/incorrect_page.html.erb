@@ -4,6 +4,14 @@
 解答・解説を確認して</br>
 再チャレンジしよう！</br>
 
+<% if learner_signed_in? %>
+  解答　<%= @solved_problem.created_problem.model_answer %></br>
+  解説　<%= @solved_problem.created_problem.explanation %></br>
+<% else %>
+  解答　<%= @created_problem.model_answer %></br>
+  解説　<%= @created_problem.explanation %></br>
+<% end %>
+
 <%= link_to "もう一度同じ問題を解く" %></br>
 <%= link_to "続けて同じジャンルの問題を解く" %></br>
 <%= link_to "続けて同じ作問者の問題を解く" %></br>

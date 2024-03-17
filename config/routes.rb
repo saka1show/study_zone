@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     get "/solved_problems/incorrect_page" => 'solved_problems#incorrect_page'
 
     resources :learners, only: [:show, :edit, :update]
-    resources :points, only: [:index, :show]
+    resources :points, only: [:create, :index, :show]
     resources :created_problems, only: [:new, :create, :index, :show, :edit, :update, :destroy]
     resources :solved_problems, only: [:new, :index, :destroy]
   end

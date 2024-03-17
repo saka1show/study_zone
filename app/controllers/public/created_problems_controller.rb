@@ -62,6 +62,9 @@ class Public::CreatedProblemsController < ApplicationController
 
   def show
     @created_problem = CreatedProblem.find(params[:id])
+    if SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner.id)
+      @solved_problem = SolvedProblem.find_by(created_problem_id: @created_problem.id, learner_id: current_learner.id)
+    end
   end
 
   def edit

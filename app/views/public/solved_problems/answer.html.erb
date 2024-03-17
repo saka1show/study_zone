@@ -1,5 +1,6 @@
 <h2>解答確認</h2>
 
+<% if learner_signed_in? %>
 あなたの解答<br>
 <%= @solved_problem.answer %></br>
 
@@ -21,3 +22,17 @@
       <%= f.hidden_field :answer_status , :value => false %>
       <input class="btn btn-danger" type="submit" value="不正解だった">
     <% end %>
+
+<% else %>
+あなたの解答<br>
+<%= @solved_problem.answer %></br>
+
+模範解答</br>
+<%= @created_problem.model_answer %></br>
+
+<%= link_to "正解した", solved_problems_correct_page_path(created_problem_id: @created_problem.id) %>
+
+<%= link_to "不正解だった", solved_problems_incorrect_page_path(created_problem_id: @created_problem.id) %>
+
+
+<% end %>

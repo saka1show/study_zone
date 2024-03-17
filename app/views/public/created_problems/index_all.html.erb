@@ -32,10 +32,10 @@
       <% else %>
         <td></td>
       <% end %>
-      <% if created_problem.learner_id == current_learner.id %>
+      <% if created_problem.learner_id == current_learner&.id %>
         <td></td>
       <% else %>
-        <% if SolvedProblem.exists?(created_problem_id: created_problem.id, learner_id: current_learner.id) %>
+        <% if SolvedProblem.exists?(created_problem_id: created_problem.id, learner_id: current_learner&.id) %>
           <td></td>
         <% else %>
           <td><%= link_to "解く", new_solved_problem_path(created_problem_id: created_problem.id) %></td>
