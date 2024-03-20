@@ -86,7 +86,6 @@ class Public::CreatedProblemsController < ApplicationController
     redirect_to created_problems_path
   end
 
-
   private
 
   def created_problem_params

@@ -3,7 +3,7 @@ class Learner < ApplicationRecord
   has_many :solved_problems
   has_many :points
   has_many :comments
-  has_many :goods
+  has_many :favorites
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

@@ -12,6 +12,17 @@
   解説　<%= @created_problem.explanation %></br>
 <% end %>
 
-<%= link_to "続けて同じジャンルの問題を解く" %></br>
+いいねする
+<% if @created_problem.favorited_by?(current_learner) %>
+  <%= link_to created_problem_favorites_path(created_problem_id: @created_problem.id, solved_problem_id: @solved_problem.id), method: :delete do %>
+    👍<%= @created_problem.favorites.count %>いいね
+  <% end %>
+<% else %>
+  <%= link_to created_problem_favorites_path(created_problem_id: @created_problem.id, solved_problem_id: @solved_problem.id), method: :post do %>
+    👍<%= @created_problem.favorites.count %>いいね
+  <% end %>
+<% end %>
+</br>
+<%= link_to "続けて同じ教科の問題を解く" %></br>
 <%= link_to "続けて同じ作問者の問題を解く" %></br>
 <%= link_to "みんなの問題一覧に戻る" %>

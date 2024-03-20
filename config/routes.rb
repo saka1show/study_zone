@@ -32,8 +32,11 @@ Rails.application.routes.draw do
     get "/solved_problems/incorrect_page" => 'solved_problems#incorrect_page'
 
     resources :learners, only: [:show, :edit, :update]
-    resources :points, only: [:create, :index, :show]
-    resources :created_problems, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :points, only: [:index, :show]
+    resources :created_problems, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+      resources :comments, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
+    end
     resources :solved_problems, only: [:new, :index, :destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -12,6 +12,14 @@
     <%= f.hidden_field :created_problem_id, :value => @created_problem.id %>
     <%= f.hidden_field :answer , :value => @solved_problem.answer %>
     <%= f.hidden_field :answer_status , :value => true %>
+
+    <% f.fields_for :point do |point_form| %>
+      <%= point_form.hidden_field :learner_id, value: current_learner.id %>
+      <%= point_form.hidden_field :solved_problem_id, value: @solved_problem.id %>
+      <%= point_form.hidden_field :point, value: 1 %>
+      <%= point_form.hidden_field :owner, value: true %>
+    <% end %>
+
     <input class="btn btn-success" type="submit" value="正解した">
   <% end %>
 
