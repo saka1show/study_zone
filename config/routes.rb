@@ -37,7 +37,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
-    resources :solved_problems, only: [:new, :index, :destroy]
+    resources :solved_problems, only: [:new, :index, :update]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

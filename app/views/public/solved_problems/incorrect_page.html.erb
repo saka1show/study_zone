@@ -12,7 +12,15 @@
   解説　<%= @created_problem.explanation %></br>
 <% end %>
 
-<%= link_to "もう一度同じ問題を解く" %></br>
-<%= link_to "続けて同じ教科の問題を解く" %></br>
-<%= link_to "続けて同じ作問者の問題を解く" %></br>
-<%= link_to "みんなの問題一覧に戻る" %>
+<% if learner_signed_in? %>
+  <%= link_to "もう一度同じ問題を解く", created_problem_path(@created_problem) %></br>
+<% end %>
+<%= form_with url: created_problems_all_path, method: :get do |f| %>
+  <%= f.hidden_field :subject_name, :value => @solved_problem.created_problem.subject.subject_name %>
+  <%= f.submit "続けて同じ教科の問題を解く" %></br>
+<% end %></br>
+<%= form_with url: created_problems_all_path, method: :get do |f| %>
+  <%= f.hidden_field :name, :value => @solved_problem.created_problem.learner.name %>
+  <%= f.submit "続けて同じ作問者の問題を解く" %></br>
+<% end %></br>
+<%= link_to "みんなの問題一覧に戻る", created_problems_all_path %>

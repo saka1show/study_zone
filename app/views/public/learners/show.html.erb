@@ -9,11 +9,35 @@
   <% else %>
     退会済</br>
   <% end %></br>
-現在のレベル　未実装</br>
-（次のレベルまで　未実装　）</br>
+現在のレベル
+<% if @point_all <= 5 %>
+  １
+<% elsif @point_all <= 25 %>
+  ２
+<% elsif @point_all <= 50 %>
+  ３
+<% elsif @point_all <= 75 %>
+  ４
+<% elsif @point_all <= 100 %>
+  ５
+<% end %>
+</br>
+（次のレベルまで
+<% if @point_all <= 5 %>
+  <%= 5 - @point_all %>
+<% elsif @point_all <= 25 %>
+  <%= 25 - @point_all %>
+<% elsif @point_all <= 50 %>
+  <%= 50 - @point_all %>
+<% elsif @point_all <= 75 %>
+  <%= 75 - @point_all %>
+<% elsif @point_all <= 100 %>
+  <%= 100 - @point_all %>
+<% end %>
+p）</br>
 
-今日のポイント　p</br>
-今月のポイント　p</br>
+今日獲得したポイント　<%= @point_today %>p</br>
+今月獲得したポイント　<%= @point_this_month %>p</br>
 累計獲得ポイント　<%= @point_all %>p</br>
 
 <%= link_to "ポイント獲得履歴", points_path %>

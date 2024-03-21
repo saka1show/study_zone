@@ -1,5 +1,10 @@
 <h2>解いた問題一覧</h2>
 
+<%= form_with url: solved_problems_path, method: :get do |f| %>
+  <%= f.hidden_field :learner_id, :value => current_learner.id %>
+  <%= f.submit "いいねした問題のみ表示する" %></br>
+<% end %>
+
 <% if SolvedProblem.exists?(learner_id: current_learner.id) %>
   <table class="table table-hover table-inverse">
     <tr>

@@ -1,4 +1,4 @@
-<% if SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner&.id) %>
+<% if SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner&.id, answer_deleted: false) %>
 
   この問題は解答済みです。</br>
   もう一度解く場合は、こちらから削除してください。

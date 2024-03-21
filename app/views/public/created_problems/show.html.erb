@@ -6,7 +6,7 @@
 <% else %>
 作問者　<%= @created_problem.learner.name %></br>
 <% end %>
-いいね数　未実装</br>
+いいね数　<%= @created_problem.favorites.count %></br>
 
 <% if SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner.id) %>
   模範解答　<%= @created_problem.model_answer %></br>
@@ -23,7 +23,14 @@
 
     解答情報を削除してもう一度この問題を解く</br>
     （※現在のステータスが正解の場合、ポイントが消えます）</br>
-    <%= link_to "解答情報を削除する", solved_problem_path(id: @solved_problem, created_problem_id: @created_problem.id), method: :delete %></br>
+    <%= form_with model: @solved_problem, url: solved_problem_path, method: :patch do |f| %>
+      <%= f.hidden_field :answer_deleted, :value => true %>
+      <%= f.hidden_field :learner_id %>
+      <%= f.hidden_field :created_problem_id %>
+      <%= f.hidden_field :answer %>
+      <%= f.hidden_field :answer_status %>
+      <%= f.submit "解答情報を削除する" %>
+    <% end %>
 
 <% end %>
 公開ステータス

@@ -1,1 +1,36 @@
 <h2>ポイント獲得履歴</h2>
+
+<table class="table table-hover table-inverse">
+  <tr>
+    <th>獲得日時</th>
+    <th>種別</th>
+    <th>作問者/問題を解いた人</th>
+    <th>問題の詳細</th>
+  </tr>
+  <% @points.each_slice(10) do |row| %>
+    <% row.each do |point| %>
+    <tr>
+      <td><%= point.created_at %></td>
+      <td>
+        <% if point.owner == false %>
+          問題が解かれた
+        <% else %>
+          問題を解いた
+        <% end %>
+      </td>
+      <% if point.solved_problem %>
+        <% if point.owner == true %>
+          <td><%= point.solved_problem.created_problem.learner.name %></td>
+        <% else %>
+          <td><%= point.solved_problem.learner.name %></td>
+        <% end %>
+        <td>
+          <%= link_to "詳細", created_problem_path(point.solved_problem.created_problem_id) %>
+        </td>
+      <% else %>
+        <td>問題は削除または非公開</td>
+      <% end %>
+    </tr>
+    <% end %>
+  <% end %>
+</table>
