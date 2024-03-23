@@ -16,8 +16,8 @@ Rails.application.routes.draw do
     resources :admins, only: [:show, :edit, :update]
     resources :learners, only: [:index, :show, :edit, :update, :destroy]
     resources :subjects, only: [:new, :create, :index, :edit, :update]
-    resources :points, only: [:index, :show, :edit, :update]
-    resources :createdproblems, only: [:index, :show, :edit, :update, :destroy]
+    resources :points, only: [:index, :edit, :update]
+    resources :created_problems, only: [:index, :show, :edit, :update, :destroy]
   end
 
   scope module: :public do
@@ -30,9 +30,10 @@ Rails.application.routes.draw do
     get "/solved_problems/correct_page" => 'solved_problems#correct_page'
     post "/solved_problems/incorrect" => 'solved_problems#incorrect'
     get "/solved_problems/incorrect_page" => 'solved_problems#incorrect_page'
+    get "/points/ranking" => 'points#ranking'
 
     resources :learners, only: [:show, :edit, :update]
-    resources :points, only: [:index, :show]
+    resources :points, only: [:index]
     resources :created_problems, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]

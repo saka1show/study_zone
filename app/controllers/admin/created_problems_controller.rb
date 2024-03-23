@@ -39,6 +39,13 @@ class Admin::CreatedProblemsController < ApplicationController
 
   def show
     @created_problem = CreatedProblem.find(params[:id])
+    @points = 0
+    @solved_problems = SolvedProblem.where(created_problem_id: @created_problem.id)
+    @solved_problems.each do |solved_problem|
+      if solved_problem.points.exists?
+        @points += 1
+      end
+    end
   end
 
   def edit

@@ -57,7 +57,7 @@
             <% if admin_signed_in? %>
               <%= link_to "学習者一覧", admin_learners_path, class:'btn bg-white text-info', role:'button' %></br>
               <%= link_to "教科一覧・編集", admin_subjects_path, class:'btn bg-white text-info', role:'button' %></br>
-              <%= link_to "みんなの問題一覧", admin_created_problems_path, class:'btn bg-white text-info', role:'button' %>
+              <%= link_to "みんなの問題一覧", created_problems_all_path, class:'btn bg-white text-info', role:'button' %>
             <% elsif learner_signed_in? %>
               <%= link_to "問題を投稿する", new_created_problem_path, class:'btn bg-white text-info', role:'button' %></br>
               <%= link_to "投稿した問題一覧", created_problems_path, class:'btn bg-white text-info', role:'button' %></br>
@@ -70,12 +70,14 @@
             <% end %>
             </br>
             </br>
-            投稿された最新問題</br>
-            <%= CreatedProblem.order(created_at: :desc).first.problem %></br>
-            作問者</br>
-            <%= CreatedProblem.order(created_at: :desc).first.learner.name %></br>
-            教科</br>
-            <%= CreatedProblem.order(created_at: :desc).first.subject.subject_name %>
+            <% if CreatedProblem.exists? %>
+              投稿された最新問題</br>
+              <%= CreatedProblem.order(created_at: :desc).first.problem %></br>
+              作問者</br>
+              <%= CreatedProblem.order(created_at: :desc).first.learner.name %></br>
+              教科</br>
+              <%= CreatedProblem.order(created_at: :desc).first.subject.subject_name %>
+            <% end %>
         </div>
       </div>
       <div class="col-lg-6">
@@ -83,17 +85,32 @@
       </div>
       <div class="col-lg-3">
         <div class="sidebar bg-secondary">
-          サイドバー右
-
+          サイドバー右</br>
           <% if admin_signed_in? %>
             <li class="nav-item"><%= link_to "マイページ", admin_admin_path(current_admin), class:'btn btn-outline-secondary', role:'button' %></li>
             <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:'btn btn-outline-secondary', role:'button' %></li>
           <% elsif learner_signed_in? %>
-            <li class="nav-item"><%= link_to "マイページ", learner_path(current_learner), class:'btn btn-outline-secondary', role:'button' %></li>
-            <li class="nav-item"><%= link_to "ログアウト", destroy_learner_session_path, method: :delete, class:'btn btn-outline-secondary', role:'button' %></li>
+            <%= link_to "ランキング詳細", points_ranking_path, class:'btn bg-white text-info', role:'button' %></br>
           <% else %>
             <li class="nav-item"><%= link_to "ログイン", learner_session_path, class:'btn btn-outline-secondary', role:'button' %></li>
           <% end %>
+
+          今日のランキング</br>
+          <% @point_ranking_today.each_slice(3) do |slice| %>
+            <% slice.each_with_index do |(learner_id, total_points), index| %>
+              <% learner = Learner.find_by(id: learner_id) %>
+              <%= "#{index + 1}位　#{learner.name}　#{total_points}pt" %></br>
+            <% end %>
+          <% end %>
+          </br>
+          今月のランキング</br>
+          <% @point_ranking_month.each_slice(3) do |slice| %>
+            <% slice.each_with_index do |(learner_id, total_points), index| %>
+              <% learner = Learner.find_by(id: learner_id) %>
+              <%= "#{index + 1}位　#{learner.name}　#{total_points}pt" %></br>
+            <% end %>
+          <% end %>
+
         </div>
       </div>
     <footer>

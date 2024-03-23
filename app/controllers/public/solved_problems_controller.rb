@@ -38,7 +38,7 @@ class Public::SolvedProblemsController < ApplicationController
       @solved_problem.learner_id = 1
       @solved_problem.answer_status = false
       @point = @solved_problem.points.build
-      @point.learner_id = current_learner.id
+      @point.learner_id = 0
       @point.solved_problem_id = @solved_problem.id
       @point.point = 1
       @point.owner = true
@@ -60,7 +60,7 @@ class Public::SolvedProblemsController < ApplicationController
         else
           render :correct
         end
-      else
+      elsif learner_signed_in?
         @point = @solved_problem.points.build
         @point.learner_id = current_learner.id
         @point.solved_problem_id = @solved_problem.id
@@ -71,6 +71,7 @@ class Public::SolvedProblemsController < ApplicationController
         else
           render :correct
         end
+      else
       end
     end
   end

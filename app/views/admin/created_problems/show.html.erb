@@ -2,8 +2,11 @@
 
 教科　<%= @created_problem.subject.subject_name %></br>
 問題　<%= @created_problem.problem %></br>
+作問者　<%= @created_problem.learner.name %></br>
+いいね数　<%= @created_problem.favorites.count %></br>
 模範解答　<%= @created_problem.model_answer %></br>
 解説　<%= @created_problem.explanation %></br>
+獲得ポイント　<%= @points %></br>
 公開ステータス
   <% if @created_problem.is_release == true %>
     公開中</br>
@@ -11,7 +14,5 @@
     非公開中</br>
   <% end %>
 投稿日時　<%= @created_problem.created_at %></br>
-獲得ポイント　未実装</br>
-いいね数　未実装</br>
 
 <%= link_to "編集する", edit_admin_created_problem_path %></br>

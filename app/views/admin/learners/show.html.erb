@@ -9,12 +9,26 @@
   <% else %>
     退会済</br>
   <% end %>
-現在のレベル　未実装</br>
-累計獲得ポイント　p</br>
+現在のレベル
+<% if @point_all <= 4 %>
+  １
+<% elsif @point_all <= 24 %>
+  ２
+<% elsif @point_all <= 49 %>
+  ３
+<% elsif @point_all <= 74 %>
+  ４
+<% elsif @point_all <= 99 %>
+  ５
+<% end %>
+</br>
+今日獲得したポイント　<%= @point_today %>p</br>
+今月獲得したポイント　<%= @point_this_month %>p</br>
+累計獲得ポイント　<%= @point_all %>p</br>
 
-<%= link_to "学習者情報の編集", edit_admin_learner_path(@learner.id) %>
+<%= link_to "学習者情報の編集", edit_admin_learner_path(@learner.id) %></br>
 
-<%= @learner.name %></br>さんが作成した最新問題</br>
+<%= @learner.name %>さんが作成した最新問題</br>
 <table class="table table-hover table-inverse">
   <tr>
     <th>教科</th>

@@ -12,23 +12,27 @@
   解説　<%= @created_problem.explanation %></br>
 <% end %>
 
-いいねする
-<% if @created_problem.favorited_by?(current_learner) %>
-  <%= link_to created_problem_favorites_path(created_problem_id: @created_problem.id, solved_problem_id: @solved_problem.id), method: :delete do %>
-    ❤️
+<% if learner_signed_in? %>
+  いいねする
+  <% if @created_problem.favorited_by?(current_learner) %>
+    <%= link_to created_problem_favorites_path(created_problem_id: @created_problem.id, solved_problem_id: @solved_problem.id), method: :delete do %>
+      ❤️
+    <% end %>
+  <% else %>
+    <%= link_to created_problem_favorites_path(created_problem_id: @created_problem.id, solved_problem_id: @solved_problem.id), method: :post do %>
+      ♡
+    <% end %>
   <% end %>
-<% else %>
-  <%= link_to created_problem_favorites_path(created_problem_id: @created_problem.id, solved_problem_id: @solved_problem.id), method: :post do %>
-    ♡
-  <% end %>
+  </br>
+
+  <%= form_with url: created_problems_all_path, method: :get do |f| %>
+    <%= f.hidden_field :subject_name, :value => @solved_problem.created_problem.subject.subject_name %>
+    <%= f.submit "続けて同じ教科の問題を解く" %></br>
+  <% end %></br>
+  <%= form_with url: created_problems_all_path, method: :get do |f| %>
+    <%= f.hidden_field :name, :value => @solved_problem.created_problem.learner.name %>
+    <%= f.submit "続けて同じ作問者の問題を解く" %></br>
+  <% end %></br>
 <% end %>
-</br>
-<%= form_with url: created_problems_all_path, method: :get do |f| %>
-  <%= f.hidden_field :subject_name, :value => @solved_problem.created_problem.subject.subject_name %>
-  <%= f.submit "続けて同じ教科の問題を解く" %></br>
-<% end %></br>
-<%= form_with url: created_problems_all_path, method: :get do |f| %>
-  <%= f.hidden_field :name, :value => @solved_problem.created_problem.learner.name %>
-  <%= f.submit "続けて同じ作問者の問題を解く" %></br>
-<% end %></br>
+
 <%= link_to "みんなの問題一覧に戻る", created_problems_all_path %>

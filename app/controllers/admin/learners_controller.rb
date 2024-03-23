@@ -7,6 +7,9 @@ class Admin::LearnersController < ApplicationController
   def show
     @learner = Learner.find(params[:id])
     @created_problem = CreatedProblem.where(learner_id: @learner.id).order(created_at: :desc)
+    @point_today = Point.where(learner_id: @learner.id).where("strftime('%Y-%m-%d', created_at) = ?", Date.today.strftime('%Y-%m-%d')).count
+    @point_this_month = Point.where(learner_id: @learner.id).where("strftime('%Y-%m', created_at) = ?", Date.today.strftime('%Y-%m')).count
+    @point_all = Point.where(learner_id: @learner.id).count
   end
 
   def edit

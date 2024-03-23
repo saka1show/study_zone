@@ -29,10 +29,12 @@
       <td><%= created_problem.problem %></td>
       <% if learner_signed_in? %>
         <td><%= link_to "詳細", created_problem_path(created_problem.id) %></td>
+      <% elsif admin_signed_in? %>
+        <td><%= link_to "詳細", admin_created_problem_path(created_problem.id) %></td>
       <% else %>
         <td></td>
       <% end %>
-      <% if created_problem.learner_id == current_learner&.id %>
+      <% if created_problem.learner_id == current_learner&.id or admin_signed_in? %>
         <td></td>
       <% else %>
         <% if SolvedProblem.exists?(created_problem_id: created_problem.id, learner_id: current_learner&.id, answer_deleted: false) %>

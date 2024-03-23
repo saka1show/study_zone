@@ -47,7 +47,7 @@
 <% if @created_problem.learner_id == current_learner.id %>
   模範解答　<%= @created_problem.model_answer %></br>
   解説　<%= @created_problem.explanation %></br>
-  獲得ポイント　未実装</br>
+  獲得ポイント　<%= @points %></br>
   <%= link_to "編集する", edit_created_problem_path %></br>
   <%= link_to "解いてくれた人にコメントする" %>
 <% else %>

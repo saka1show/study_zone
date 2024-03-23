@@ -1,0 +1,39 @@
+<table>
+  <thead>
+    <tr>
+      <th>順位</th>
+      <th>学習者名</th>
+      <th>ポイント合計</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @point_ranking_today.each_with_index do |(learner_id, total_points), index| %>
+      <% learner = Learner.find_by(id: learner_id) %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= learner.name if learner %></td>
+        <td><%= total_points %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>順位</th>
+      <th>学習者名</th>
+      <th>ポイント合計</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @point_ranking_month.each_with_index do |(learner_id, total_points), index| %>
+      <% learner = Learner.find_by(id: learner_id) %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= learner.name if learner %></td>
+        <td><%= total_points %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
