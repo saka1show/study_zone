@@ -18,7 +18,7 @@
 <% end %>
 <% else %>
 問題の投稿機能はログイン後に利用可能です。</br>
-ログインはこちら</br>
-新規登録はこちら
+ログインは<%= link_to "こちら", new_learner_session_path %></br>
+新規登録は<%= link_to "こちら", new_learner_registration_path %>
 <% end %>
 

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :admins, only: [:show, :edit, :update]
     resources :learners, only: [:index, :show, :edit, :update, :destroy]
     resources :subjects, only: [:new, :create, :index, :edit, :update]
-    resources :points, only: [:index, :edit, :update]
+    resources :points, only: [:index]
     resources :created_problems, only: [:index, :show, :edit, :update, :destroy]
   end
 
@@ -35,10 +35,10 @@ Rails.application.routes.draw do
     resources :learners, only: [:show, :edit, :update]
     resources :points, only: [:index]
     resources :created_problems, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
-      resources :comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
-    resources :solved_problems, only: [:new, :index, :update]
+    resources :solved_problems, only: [:new, :index, :update] 
+    resources :comments, only: [:create, :index, :update, :destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -89,6 +89,7 @@ class Public::SolvedProblemsController < ApplicationController
     if learner_signed_in?
       @solved_problem = SolvedProblem.find(params[:id])
       @created_problem = CreatedProblem.find(@solved_problem.created_problem_id)
+      @comment = Comment.find_by(solved_problem_id: @solved_problem.id)
     else
       created_problem_id = params[:created_problem_id]
       @created_problem = CreatedProblem.find(created_problem_id)
@@ -99,6 +100,7 @@ class Public::SolvedProblemsController < ApplicationController
     if learner_signed_in?
       @solved_problem = SolvedProblem.find(params[:id])
       @created_problem = CreatedProblem.find(@solved_problem.created_problem_id)
+      @comment = Comment.find_by(solved_problem_id: @solved_problem.id)
     else
       created_problem_id = params[:created_problem_id]
       @created_problem = CreatedProblem.find(created_problem_id)
