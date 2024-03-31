@@ -3,8 +3,19 @@
   この問題は解答済みです。</br>
   もう一度解く場合は、こちらから削除してください。
 
-<% else %>
+<% elsif SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner&.id, answer_deleted: true) %>
+<h2>解答画面</h2>
 
+  問題</br>
+  <%= @created_problem.problem %>
+
+  <%= form_with model: @solved_problem, url: solved_problems_reanswer_path(created_problem_id: @created_problem.id), method: :patch do |f| %>
+    解答</br>
+    <%= f.text_field :answer %></br>
+    <%= f.submit "解答する" %>
+  <% end %>
+
+<% else %>
 <h2>解答画面</h2>
 
   問題</br>

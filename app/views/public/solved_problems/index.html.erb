@@ -12,6 +12,7 @@
         <th>教科</th>
         <th>問題</th>
         <th></th>
+        <th></th>
       </tr>
   <% @solved_problems.each_slice(10) do |row| %>
     <% row.each do |solved_problem| %>
@@ -20,6 +21,13 @@
         <td><%= solved_problem.created_problem.subject.subject_name %></td>
         <td><%= solved_problem.created_problem.problem %></td>
         <td><%= link_to "詳細", created_problem_path(solved_problem.created_problem.id) %></td>
+        <td>
+          <% if solved_problem.answer_deleted %>
+            解答情報削除済み　再回答可能
+          <% else %>
+            解答済み
+          <% end %>
+        </td>
       </tr>
     <% end %>
   <% end %>

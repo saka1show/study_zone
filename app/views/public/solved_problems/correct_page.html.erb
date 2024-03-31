@@ -26,13 +26,13 @@
   </br>
 
 <% if Comment.exists?(learner_id: current_learner.id, solved_problem_id: @solved_problem.id) %>
-  <%= form_with model: @comment, url: solved_problem_comment_path(@solved_problem, @comment), method: :patch do |f| %>
+  <%= form_with model: @comment, url: comment_path(@solved_problem, @comment), method: :patch do |f| %>
     <%= f.text_area :content %>
     <%= f.submit "コメントを修正する" %>
   <% end %>
-  <%= link_to "コメントを削除する", solved_problem_comment_path(@solved_problem, @comment), method: :delete %>
+  <%= link_to "コメントを削除する", comment_path(@solved_problem, @comment), method: :delete %>
 <% else %>
-  <%= form_with model: @comment, url: solved_problem_comments_path(solved_problem_id: @solved_problem.id), method: :post do |f| %>
+  <%= form_with model: @comment, url: comments_path(solved_problem_id: @solved_problem.id), method: :post do |f| %>
     <%= f.text_area :content %>
     <%= f.submit "コメントする" %>
   <% end %>

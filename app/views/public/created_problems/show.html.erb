@@ -8,7 +8,8 @@
 <% end %>
 いいね数　<%= @created_problem.favorites.count %></br>
 
-<% if SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner.id) %>
+<% if SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner.id, answer: "UnKnOwN" ) %>
+<% elsif SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner.id) %>
   模範解答　<%= @created_problem.model_answer %></br>
 
   あなたの解答　<%= @solved_problem.answer %></br>
@@ -27,8 +28,9 @@
       <%= f.hidden_field :answer_deleted, :value => true %>
       <%= f.hidden_field :learner_id %>
       <%= f.hidden_field :created_problem_id %>
-      <%= f.hidden_field :answer %>
-      <%= f.hidden_field :answer_status %>
+      <%= f.hidden_field :answer, :value => "UnKnOwN" %>
+      <%= f.hidden_field :answer_status, :value => false %>
+      <%= f.hidden_field :answer_deleted, :value => true %>
       <%= f.submit "解答情報を削除する" %>
     <% end %>
 
@@ -49,6 +51,5 @@
   解説　<%= @created_problem.explanation %></br>
   獲得ポイント　<%= @points %></br>
   <%= link_to "編集する", edit_created_problem_path %></br>
-  <%= link_to "解いてくれた人にコメントする" %>
 <% else %>
 <% end %>

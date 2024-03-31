@@ -1,0 +1,41 @@
+<h2>コメント履歴</h2>
+
+自分のコメント一覧</br>
+<table class="table table-hover table-inverse">
+  <tr>
+    <th>日時</th>
+    <th>問題</th>
+    <th>作問者</th>
+    <th>コメント内容</th>
+  </tr>
+  <% @comments_sent.each_slice(10) do |row| %>
+    <% row.each do |comment| %>
+      <tr>
+        <td><%= comment.created_at %></td>
+        <td><%= comment.solved_problem.created_problem.problem %></td>
+        <td><%= comment.solved_problem.created_problem.learner.name %></td>
+        <td><%= comment.content %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+届いたコメント一覧</br>
+<table class="table table-hover table-inverse">
+  <tr>
+    <th>日時</th>
+    <th>問題</th>
+    <th>作問者</th>
+    <th>コメント内容</th>
+  </tr>
+  <% @comments_received.each_slice(10) do |row| %>
+    <% row.each do |comment| %>
+      <tr>
+        <td><%= comment.created_at %></td>
+        <td><%= comment.solved_problem.created_problem.problem %></td>
+        <td><%= comment.solved_problem.learner.name %></td>
+        <td><%= comment.content %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

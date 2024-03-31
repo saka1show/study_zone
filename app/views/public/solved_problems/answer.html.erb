@@ -7,11 +7,34 @@
 模範解答</br>
 <%= @created_problem.model_answer %></br>
 
+<% if SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner.id) %>
+  <%= form_with model: @solved_problem, url: solved_problems_re_correct_path(id: @solved_problem) do |f| %>
+    <%= f.hidden_field :answer_deleted, :value => false %>
+
+    <% f.fields_for :point do |point_form| %>
+      <%= point_form.hidden_field :learner_id, value: current_learner.id %>
+      <%= point_form.hidden_field :solved_problem_id, value: @solved_problem.id %>
+      <%= point_form.hidden_field :point, value: 1 %>
+      <%= point_form.hidden_field :owner, value: true %>
+    <% end %>
+
+    <input class="btn btn-success" type="submit" value="正解した">
+  <% end %>
+
+　　<%= form_with model: @solved_problem, url: solved_problems_re_incorrect_path(id: @solved_problem) do |f| %>
+      <%= f.hidden_field :answer_deleted, :value => false %>
+      <input class="btn btn-danger" type="submit" value="不正解だった">
+    <% end %>
+
+
+<% else %>
+
   <%= form_with model: @solved_problem, url: solved_problems_correct_path do |f| %>
     <%= f.hidden_field :learner_id, :value => current_learner.id %>
     <%= f.hidden_field :created_problem_id, :value => @created_problem.id %>
     <%= f.hidden_field :answer , :value => @solved_problem.answer %>
     <%= f.hidden_field :answer_status , :value => true %>
+    <%= f.hidden_field :answer_deleted, :value => false %>
 
     <% f.fields_for :point do |point_form| %>
       <%= point_form.hidden_field :learner_id, value: current_learner.id %>
@@ -28,8 +51,10 @@
       <%= f.hidden_field :created_problem_id, :value => @created_problem.id %>
       <%= f.hidden_field :answer , :value => @solved_problem.answer %>
       <%= f.hidden_field :answer_status , :value => false %>
+      <%= f.hidden_field :answer_deleted, :value => false %>
       <input class="btn btn-danger" type="submit" value="不正解だった">
     <% end %>
+<% end %>
 
 <% else %>
 あなたの解答<br>
