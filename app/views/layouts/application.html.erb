@@ -9,25 +9,24 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <header class="bg-info h-100">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
           <nav class="navbar-brand">
             <% if admin_signed_in? %>
-              <%= link_to "Study Zone", "/admin", class:"nav-link h2 text-primary" %>
+              <%= link_to "Study Zone", "/admin", class:"nav-link h1 text-white" %>
             <% elsif learner_signed_in? %>
-              <%= link_to "Study Zone", "/learners", class:"nav-link h2 text-primary" %>
+              <%= link_to "Study Zone", "/learners", class:"nav-link h1 text-white" %>
             <% else %>
-              <%= link_to "Study Zone", "/", class:"nav-link h2 text-primary" %>
+              <%= link_to "Study Zone", "/", class:"nav-link h1 text-white" %>
             <% end %>
           </nav>
-          <div class="text-center">
+          <div class="text-center h5 text-white">
             <% if admin_signed_in? %>
-              管理者　ログイン中
+              管理者　<%= current_admin.name %>さん　がログイン中
             <% elsif learner_signed_in? %>
-              学習者　ログイン中
+              学習者　<%= current_learner.name %>さん　がログイン中
             <% else %>
               積極的なインプット・アウトプットを支援するサイトです！</br>
               ポイントをたくさんゲットしてランキング上位を目指しましょう！
@@ -42,87 +41,78 @@
               　<li class="nav-item"><%= link_to "ログアウト", destroy_learner_session_path, method: :delete, class:'btn bg-white text-info', role:'button' %></li>
             <% else %>
               　<li class="nav-item"><%= link_to "ログイン", learner_session_path, class:'btn bg-white text-info', role:'button' %></li>
+              　<li class="nav-item"><%= link_to "新規登録", new_learner_registration_path, class:'btn bg-white text-info', role:'button' %></li>
             <% end %>
           </ul>
         </div>
       </nav>
-
     </header>
     <div class="row">
-      <div class="col-lg-2">
-        <div class="sidebar bg-secondary">
-          <div class="row justify-content-center">
-              <% if admin_signed_in? %>
-                <%= link_to "学習者一覧", admin_learners_path, class:'btn bg-white text-info mt-3', role:'button' %></br>
-                <%= link_to "教科一覧・編集", admin_subjects_path, class:'btn bg-white text-info mt-3', role:'button' %></br>
-                <%= link_to "みんなの問題一覧", created_problems_all_path, class:'btn bg-white text-info mt-3', role:'button' %>
-              <% elsif learner_signed_in? %>
-                <%= link_to "問題を投稿する", new_created_problem_path, class:'btn bg-white text-info mt-3', role:'button' %></br>
-                <%= link_to "投稿した問題一覧", created_problems_path, class:'btn bg-white text-info mt-3', role:'button' %></br>
-                <%= link_to "解いた問題一覧", solved_problems_path, class:'btn bg-white text-info mt-3', role:'button' %></br>
-                <%= link_to "みんなの問題一覧", created_problems_all_path, class:'btn bg-white text-info mt-3', role:'button' %>
-              <% else %>
-                <%= link_to "問題を投稿する", new_created_problem_path, class:'btn bg-white text-info mt-3', role:'button' %></br>
-                <%= link_to "投稿した問題一覧", created_problems_path, class:'btn bg-white text-info mt-3', role:'button' %></br>
-                <%= link_to "みんなの問題一覧", created_problems_all_path, class:'btn bg-white text-info mt-3', role:'button' %>
-              <% end %>
-          </div>
-          <div class="row justify-content-center mt-5">
-            <div class="bg-white pr-1 pl-1">
+      <div class="col-2 bg-secondary">
+        <div class="row sidebar-button pt-4">
+          <% if admin_signed_in? %>
+            <%= link_to "学習者一覧", admin_learners_path, class:'sidebar-buttons', role:'button' %></br>
+            <%= link_to "教科一覧・編集", admin_subjects_path, class:'sidebar-buttons', role:'button' %></br>
+            <%= link_to "みんなの問題一覧", created_problems_all_path, class:'sidebar-buttons', role:'button' %>
+          <% elsif learner_signed_in? %>
+            <%= link_to "問題を投稿する", new_created_problem_path, class:'sidebar-buttons', role:'button' %></br>
+            <%= link_to "投稿した問題一覧", created_problems_path, class:'sidebar-buttons', role:'button' %></br>
+            <%= link_to "解いた問題一覧", solved_problems_path, class:'sidebar-buttons', role:'button' %></br>
+            <%= link_to "みんなの問題一覧", created_problems_all_path, class:'sidebar-buttons', role:'button' %>
+          <% else %>
+            <%= link_to "問題を投稿する", new_created_problem_path, class:'sidebar-buttons', role:'button' %></br>
+            <%= link_to "投稿した問題一覧", created_problems_path, class:'sidebar-buttons', role:'button' %></br>
+            <%= link_to "みんなの問題一覧", created_problems_all_path, class:'sidebar-buttons', role:'button' %>
+          <% end %>
+        </div>
+        <div class="row sidebar-table">
             <% if CreatedProblem.exists? %>
-              投稿された最新問題</br>
-              <%= CreatedProblem.order(created_at: :desc).first.problem %></br>
-              作問者</br>
-              <%= CreatedProblem.order(created_at: :desc).first.learner.name %></br>
-              教科</br>
+              <h5><strong>投稿された最新問題</strong></h5>
+              <%= CreatedProblem.order(created_at: :desc).first.problem %></br></br>
+              <h5><strong>作問者</strong></h5>
+              <%= CreatedProblem.order(created_at: :desc).first.learner.name %></br></br>
+              <h5><strong>教科</strong></h5>
               <%= CreatedProblem.order(created_at: :desc).first.subject.subject_name %>
             <% end %>
-            </div>
-          </div>
         </div>
       </div>
 
-      <div class="col-lg-8">
+      <div class="col-8">
         <%= yield %>
       </div>
 
-      <div class="col-lg-2">
-        <div class="sidebar bg-secondary">
-          <div class="row justify-content-center">
+      <div class="col-2 bg-secondary">
+        <div class="row sidebar-button pt-4">
           <% if admin_signed_in? %>
-            <%= link_to "ランキング詳細", admin_points_path, class:'btn bg-white text-info mt-3', role:'button' %></br>
+            <%= link_to "ランキング詳細", admin_points_path, class:'sidebar-buttons', role:'button' %></br>
           <% elsif learner_signed_in? %>
-            <%= link_to "ランキング詳細", points_ranking_path, class:'btn bg-white text-info mt-3', role:'button' %></br>
+            <%= link_to "ランキング詳細", points_ranking_path, class:'sidebar-buttons', role:'button' %></br>
           <% else %>
-            <%= link_to "ランキング詳細", points_ranking_path, class:'btn bg-white text-info mt-3', role:'button' %></br>
+            <%= link_to "ランキング詳細", points_ranking_path, class:'sidebar-buttons', role:'button' %></br>
           <% end %>
-          </div>
-
-          <div class="row justify-content-center mt-3">
-            <div class="bg-white pr-1 pl-1">
-          今日のランキング</br>
-          <% @point_ranking_today.each_slice(3) do |slice| %>
-            <% slice.each_with_index do |(learner_id, total_points), index| %>
-              <% learner = Learner.find_by(id: learner_id) %>
-              <%= "#{index + 1}位　#{learner.name}　#{total_points}pt" %></br>
-            <% end %>
-          <% end %>
-            </div>
-            <div class="bg-white mt-3 pr-1 pl-1">
-          今月のランキング</br>
-          <% @point_ranking_month.each_slice(3) do |slice| %>
-            <% slice.each_with_index do |(learner_id, total_points), index| %>
-              <% learner = Learner.find_by(id: learner_id) %>
-              <%= "#{index + 1}位　#{learner.name}　#{total_points}pt" %></br>
-            <% end %>
-          <% end %>
-          </div>
-          </div>
-
         </div>
+          <div class="sidebar-table">
+            <h5><strong>今日のランキング</strong></h5>
+            <% @point_ranking_today.each_slice(3) do |slice| %>
+              <% slice.each_with_index do |(learner_id, total_points), index| %>
+                <% learner = Learner.find_by(id: learner_id) %>
+                <%= "#{index + 1}位　#{learner.name}　#{total_points}pt" %></br>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="sidebar-table">
+            <h5><strong>今月のランキング</strong></h5>
+            <% @point_ranking_month.each_slice(3) do |slice| %>
+              <% slice.each_with_index do |(learner_id, total_points), index| %>
+                <% learner = Learner.find_by(id: learner_id) %>
+                <%= "#{index + 1}位　#{learner.name}　#{total_points}pt" %></br>
+              <% end %>
+            <% end %>
+          </div>
       </div>
+    </div>
     <footer>
-
+      <h3>Let's learn together!</h3>
     </footer>
   </body>
 </html>

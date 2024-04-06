@@ -1,26 +1,53 @@
-<h2>ログイン</h2>
+<div class="d-inline-block">
+  <h2 class="bg-primary text-white">ログイン</h2>
+</div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :"メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :"パスワード" %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :"パスワードを記憶する" %>
-    </div>
+<table class="h5">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <tr>
+      <div class="field">
+        <td align="right">
+          <%= f.label :"メールアドレス" %>
+          　　<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <div class="field">
+        <td align="right">
+          <%= f.label :"パスワード" %>
+          　　<%= f.password_field :password, autocomplete: "current-password" %>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <td align="right">
+            <%= f.check_box :remember_me %>
+            <%= f.label :"パスワードを記憶する" %>
+          </tr>
+        </div>
+      <% end %>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center">
+        <input class="btn btn-primary" type="submit" value="ログイン">
+      </td>
+    </tr>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit "ログイン" %>
-  </div>
-<% end %>
-
-新規登録をされる方は<%= link_to "こちら", new_learner_registration_path %>
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">
+      新規登録をされる方は<%= link_to "こちら", new_learner_registration_path, class: 'link-underline' %>
+    </td>
+  </tr>
+</table>

@@ -1,1 +1,46 @@
 @use '~bootstrap/scss/bootstrap';
+
+.sidebar-button {
+  display: flex;
+  flex-direction: column;
+  margin: 1px 10px;
+}
+
+.sidebar-buttons {
+  margin-top: 2px;
+  padding: 3px;
+  text-align: center;
+  background-color: #66cdaa;
+  font-weight: bold;
+  color: black;
+}
+
+.sidebar-table {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 10px;
+  padding: 2px;
+  background-color: white;
+  text-align: center;
+}
+
+footer {
+  width: auto;
+  height: 100px;
+  background-color: black;
+  color: #ffffff;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.link-underline {
+  text-decoration: underline;
+}
+
+table {
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}

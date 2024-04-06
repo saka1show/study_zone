@@ -1,4 +1,6 @@
-<h2>投稿問題一覧画面</h2>
+<div class="d-inline-block">
+  <h2 class="bg-primary text-white">投稿問題一覧</h2>
+</div>
   <% if learner_signed_in? %>
     <h4>検索欄</h4>
   　検索条件は１つの場合その条件にのみ合致する投稿が表示され、2つ以上の場合は、複数条件に合致する投稿が表示されます。
@@ -34,7 +36,9 @@
   <% end %>
 </table>
 <% else %>
-問題の投稿した問題一覧機能はログイン後に利用可能です。</br>
-ログインは<%= link_to "こちら", new_learner_session_path %></br>
-新規登録は<%= link_to "こちら", new_learner_registration_path %>
+  <div class="h2 text-center pt-5">
+    <p class="pt-4">投稿問題一覧機能はログイン後に利用可能です。</p>
+    <p class="pt-4">ログインは<%= link_to "こちら", new_learner_session_path, class: 'link-underline' %></p>
+    <p class="pt-4">新規登録は<%= link_to "こちら", new_learner_registration_path, class: 'link-underline' %></p>
+  </div>
 <% end %>

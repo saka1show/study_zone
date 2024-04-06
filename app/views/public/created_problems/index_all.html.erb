@@ -1,50 +1,85 @@
-<h2>みんなの問題一覧</h2>
-    <h4>検索欄</h4>
-  　検索条件は１つの場合その条件にのみ合致する投稿が表示され、2つ以上の場合は、複数条件に合致する投稿が表示されます。
-  <%= form_with url: created_problems_all_path, method: :get do |f| %>
-    作問者検索（完全一致のみ検索可能）</br>
-    <%= f.text_field :name %></br>
-    教科検索（選択肢より選んで下さい）</br>
-    <%= f.select :subject_name, options_for_select([["",""]] + @subjects.pluck(:subject_name)) %></br>
-    キーワードで問題内容から検索（部分一致も検索可能）</br>
-    <%= f.text_field :problem, placeholder: "キーワードを入力" %></br>
-    <%= f.submit "検索" %></br>
-  <% end %>
+<div class="d-inline-block">
+  <h2 class="bg-primary text-white">みんなの問題一覧</h2>
+</div>
 
-<h3>投稿された最新問題</h3></br>
+<div class="border border-5 bg-light pb-3">
+  <table>
+    <tr>
+      <td align="left">
+        <h4 class="bg-info text-white d-inline-block">検索欄</h4>
+      </td>
+    </tr>
+    <tr>
+      <td align="left", colspan="4">
+        検索条件は１つの場合その条件にのみ合致する投稿が表示され、2つ以上の場合は、複数条件に合致する投稿が表示されます。
+      </td>
+    </tr>
+    <%= form_with url: created_problems_all_path, method: :get do |f| %>
+    <tr>
+      <td align="right", colspan="2">
+        作問者検索（完全一致のみ検索可能）
+      </td>
+      <td align="left", colspan="2">
+        <%= f.text_field :name, placeholder: "作問者を入力" %>
+      </td>
+    </tr>
+    <tr>
+      <td align="right", colspan="2">
+        教科検索（選択肢より選んで下さい)
+      </td>
+      <td align="left", colspan="2">
+        <%= f.select :subject_name, options_for_select([["教科を選択",""]] + @subjects.pluck(:subject_name)) %>
+      </td>
+    </tr>
+    <tr>
+      <td align="right", colspan="2">
+        キーワードで問題内容から検索（部分一致も検索可能）
+      </td>
+      <td align="left", colspan="2">
+        <%= f.text_field :problem, placeholder: "キーワードを入力" %>
+      </td>
+    </tr>
+    <tr>
+      <td align="right", colspan="4">
+        <input class="btn btn-info" type="submit" value="検索する">
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
 
-<table class="table table-hover table-inverse">
-  <tr>
-    <th>作問者</th>
-    <th>教科</th>
-    <th>問題</th>
-    <th></th>
-    <th></th>
+<div class="d-inline-block">
+  <h3 class="bg-dark text-white mt-5">投稿された問題</h3>
+</div>
+
+<table class="table table-hover table-inverse table-bordered border-dark">
+  <tr class="bg-dark text-white h5">
+    <th style="text-align: center;">作問者</th>
+    <th style="text-align: center;">教科</th>
+    <th colspan="3">問題</th>
   </tr>
   <% @created_problems.each_slice(10) do |row| %>
     <% row.each do |created_problem| %>
     <tr>
-      <td><%= created_problem.learner.name %></td>
-      <td><%= created_problem.subject.subject_name %></td>
-      <td><%= created_problem.problem %></td>
+      <td class="align-middle text-center"><%= created_problem.learner.name %></td>
+      <td class="align-middle text-center"><%= created_problem.subject.subject_name %></td>
+      <td class="align-middle"><%= created_problem.problem %></td>
       <% if learner_signed_in? %>
-        <td><%= link_to "詳細", created_problem_path(created_problem.id) %></td>
+        <td class="align-middle text-center"><%= link_to "詳細", created_problem_path(created_problem.id), class: "btn btn-success" %></td>
       <% elsif admin_signed_in? %>
-        <td><%= link_to "詳細", admin_created_problem_path(created_problem.id) %></td>
+        <td class="align-middle text-center"><%= link_to "詳細", admin_created_problem_path(created_problem.id), class: "btn btn-success" %></td>
       <% else %>
-        <td></td>
       <% end %>
       <% if created_problem.learner_id == current_learner&.id or admin_signed_in? %>
-        <td></td>
       <% else %>
         <% if SolvedProblem.exists?(created_problem_id: created_problem.id, learner_id: current_learner&.id, answer_deleted: false) %>
-          <td></td>
         <% else %>
-          <td><%= link_to "解く", new_solved_problem_path(created_problem_id: created_problem.id) %></td>
+          <td class="align-middle text-center"><%= link_to "解く", new_solved_problem_path(created_problem_id: created_problem.id), class: "btn btn-primary" %></td>
         <% end %>
       <% end %>
     </tr>
     <% end %>
   <% end %>
-  <%= paginate @created_problems %>
 </table>
+
+  <%= paginate @created_problems %>
