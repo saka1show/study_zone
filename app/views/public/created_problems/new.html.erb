@@ -2,22 +2,59 @@
   <h2 class="bg-primary text-white">問題新規投稿</h2>
 </div>
 <% if learner_signed_in? %>
-  <%= form_with model: @created_problem, url: created_problems_path, method: :post do |f| %>
-  教科</br>
-  <%= f.select :subject_id, options_from_collection_for_select(Subject.all, :id, :subject_name) %></br>
-
-  問題</br>
-  <%= f.text_field :problem %></br>
-
-  模範解答</br>
-  <%= f.text_field :model_answer %></br>
-
-  解説</br>
-  <%= f.text_field :explanation %></br>
-
-  <%= f.submit "投稿する" %>
-
-<% end %>
+  <table>
+    <%= form_with model: @created_problem, url: created_problems_path, method: :post do |f| %>
+      <tr>
+        <td class="text-right">
+          <h4 class="d-inline-block bg-dark text-white">教科</h4>
+        </td>
+        <td class="text-left">
+          　<%= f.select :subject_id, options_from_collection_for_select(Subject.all, :id, :subject_name) %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="number_of_columns">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <h4 class="d-inline-block bg-dark text-white">問題</h4>
+        </td>
+        <td class="text-left">
+          　<%= f.text_field :problem, placeholder: '問題を入力', style: 'width: 400px; height: 100px;' %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="number_of_columns">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <h4 class="d-inline-block bg-dark text-white">模範解答</h4>
+        </td>
+        <td class="text-left">
+          　<%= f.text_field :model_answer, placeholder: '模範解答を入力' %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="number_of_columns">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <h4 class="d-inline-block bg-dark text-white">解説</h4>
+        </td>
+        <td class="text-left">
+          　<%= f.text_field :explanation, placeholder: '解説を入力', style: 'width: 400px; height: 100px;' %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="number_of_columns">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="center", colspan="2">
+          <input class="btn btn-primary" type="submit" value="投稿する">
+        </td>
+      </tr>
+    <% end %>
+  </table>
 <% else %>
   <div class="h2 text-center pt-5">
     <p class="pt-4">問題新規投稿機能はログイン後に利用可能です。</p>

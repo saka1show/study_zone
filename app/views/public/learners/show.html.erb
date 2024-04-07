@@ -1,47 +1,84 @@
-<h2>マイページ</h2>
+<div class="d-inline-block">
+  <h2 class="bg-primary text-white">マイページ</h2>
+</div>
 
-ニックネーム　<%= @learner.name %></br>
-
-<%= link_to "登録情報の変更", edit_learner_path(@learner) %></br>
-
-ステータス　<% if @learner.is_active == true %>
-    有効会員</br>
-  <% else %>
-    退会済</br>
-  <% end %></br>
-現在のレベル
-<% if @point_all <= 4 %>
-  １
-<% elsif @point_all <= 24 %>
-  ２
-<% elsif @point_all <= 49 %>
-  ３
-<% elsif @point_all <= 74 %>
-  ４
-<% elsif @point_all <= 99 %>
-  ５
-<% end %>
-</br>
-（次のレベルまで
-<% if @point_all <= 4 %>
-  <%= 5 - @point_all %>
-<% elsif @point_all <= 24 %>
-  <%= 25 - @point_all %>
-<% elsif @point_all <= 49 %>
-  <%= 50 - @point_all %>
-<% elsif @point_all <= 74 %>
-  <%= 75 - @point_all %>
-<% elsif @point_all <= 99 %>
-  <%= 100 - @point_all %>
-<% end %>
-p）</br>
-
-今日獲得したポイント　<%= @point_today %>p</br>
-今月獲得したポイント　<%= @point_this_month %>p</br>
-累計獲得ポイント　<%= @point_all %>p</br>
-
-<%= link_to "ポイント獲得履歴", points_path %>
-
-</br>
-</br>
-<%= link_to "コメント履歴", comments_path %>
+<table>
+  <tr>
+    <td align="right", class="h3">ニックネーム</td>
+    <td align="left", class="h4">　<%= @learner.name %></td>
+  </tr>
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right", class="h3">ステータス</td>
+    <td align="left", class="h4">
+      <% if @learner.is_active == true %>
+        　会員登録済み
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td  align="right", colspan="2">
+      登録情報の変更及び退会手続は<%= link_to "こちら", edit_learner_path(@learner), class: 'link-underline' %>
+    </td>
+  </tr>
+　<tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right", class="h3">現在のレベル</td>
+    <td align="left", class="h4">
+      <% if @point_all <= 4 %>
+        　１
+      <% elsif @point_all <= 24 %>
+        　２
+      <% elsif @point_all <= 49 %>
+        　３
+      <% elsif @point_all <= 74 %>
+        　４
+      <% elsif @point_all <= 99 %>
+        　５
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td align="right", colspan="2">
+      （次のレベルまで
+        <% if @point_all <= 4 %>
+          <%= 5 - @point_all %>
+        <% elsif @point_all <= 24 %>
+          <%= 25 - @point_all %>
+        <% elsif @point_all <= 49 %>
+          <%= 50 - @point_all %>
+        <% elsif @point_all <= 74 %>
+          <%= 75 - @point_all %>
+        <% elsif @point_all <= 99 %>
+          <%= 100 - @point_all %>
+        <% end %>
+      pt）
+    </td>
+  </tr>
+  <tr>
+    <td align="right", class="h3">今日獲得したポイント</td>
+    <td align="left", class="h4">　　<%= @point_today %>pt</td>
+  </tr>
+  <tr>
+    <td align="right", class="h3">今月獲得したポイント</td>
+    <td align="left", class="h4">　　<%= @point_this_month %>pt</td>
+  </tr>
+  <tr>
+    <td align="right", class="h3">累計獲得ポイント</td>
+    <td align="left", class="h4">　　<%= @point_all %>pt</td>
+  </tr>
+  <tr>
+    <td  align="right", colspan="2">
+      <%= link_to "ポイント獲得履歴", points_path, class: 'link-underline' %>
+    </td>
+  </tr>
+  <tr>
+    <td  align="right", colspan="2">
+      <%= link_to "コメント履歴", comments_path, class: 'link-underline' %>
+    </td>
+  </tr>
+</table>

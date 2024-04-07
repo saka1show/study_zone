@@ -1,26 +1,70 @@
-<h2>投稿問題編集</h2>
+<div class="d-inline-block">
+  <h2 class="bg-primary text-white">投稿問題編集</h2>
+</div>
 
-<%= form_with model: @created_problem, url: created_problem_path do |f| %>
-  教科</br>
-  <%= f.select :subject_id, options_from_collection_for_select(Subject.all, :id, :subject_name, @created_problem.subject_id) %></br>
-
-  問題</br>
-  <%= f.text_field :problem %></br>
-
-  模範解答</br>
-  <%= f.text_field :model_answer %></br>
-
-  解説</br>
-  <%= f.text_field :explanation %></br>
-
-  公開ステータス</br>
-   <%= f.radio_button :is_release, true %>
-        <%= f.label :is_release, "公開中にする" %>
-        　<%= f.radio_button :is_release, false %>
-        <%= f.label :is_release, "非公開にする" %></br>
-
-  <%= f.submit "更新する" %>
-
-<% end %>
-
-<%= link_to "削除する", created_problem_path, method: :delete %>
+<table>
+  <%= form_with model: @created_problem, url: created_problem_path do |f| %>
+    <tr>
+      <td class="text-right">
+        <h4 class="d-inline-block bg-dark text-white">教科</h4>
+      </td>
+      <td class="text-left">
+        　<%= f.select :subject_id, options_from_collection_for_select(Subject.all, :id, :subject_name, @created_problem.subject_id) %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="text-right">
+        <h4 class="d-inline-block bg-dark text-white">問題</h4>
+      </td>
+      <td class="text-left">
+        　<%= f.text_field :problem, placeholder: '問題を入力', style: 'width: 400px; height: 100px;' %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="text-right">
+        <h4 class="d-inline-block bg-dark text-white">模範解答</h4>
+      </td>
+      <td class="text-left">
+        　<%= f.text_field :model_answer, placeholder: '模範解答を入力' %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="text-right">
+        <h4 class="d-inline-block bg-dark text-white">解説</h4>
+      </td>
+      <td class="text-left">
+        　<%= f.text_field :explanation, placeholder: '解説を入力', style: 'width: 400px; height: 100px;' %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="right">
+        <h4 class="d-inline-block bg-dark text-white">公開ステータス</h4>
+      </td>
+      <td align="left" class="h5">
+        　<%= f.radio_button :is_release, true %>　<%= f.label :is_release, "公開中にする" %>
+        　<%= f.radio_button :is_release, false %>　<%= f.label :is_release, "非公開にする" %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center", colspan="2">
+        <input class="btn btn-primary" type="submit" value="更新する">
+        　<%= link_to "削除する", created_problem_path, method: :delete, class: 'btn btn-danger' %>
+      </td>
+    </tr>
+  <% end %>
+</table>

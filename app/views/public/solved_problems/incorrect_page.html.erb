@@ -1,39 +1,112 @@
-<h2>不正解画面</h2>
+<div class="d-inline-block">
+  <h2 class="bg-primary text-white">解答結果：不正解</h2>
+</div>
 
-残念、不正解！</br>
-解答・解説を確認して</br>
-再チャレンジしよう！</br>
-
-<% if learner_signed_in? %>
-  解答　<%= @solved_problem.created_problem.model_answer %></br>
-  解説　<%= @solved_problem.created_problem.explanation %></br>
-<% else %>
-  解答　<%= @created_problem.model_answer %></br>
-  解説　<%= @created_problem.explanation %></br>
-<% end %>
-
-<% if Comment.exists?(learner_id: current_learner.id, solved_problem_id: @solved_problem.id) %>
-  <%= form_with model: @comment, url: comment_path(@solved_problem, @comment), method: :patch do |f| %>
-    <%= f.text_area :content %>
-    <%= f.submit "コメントを修正する" %>
+<table>
+  <tr class="text-center">
+    <td colspan="2">
+      <h3 class="d-inline-block bg-danger text-white">残念、不正解！</h3>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <tr class="text-center">
+    <td colspan="2"><h4>解答・解説を確認して再チャレンジしよう！</h4></td>
+  </tr>
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <% if learner_signed_in? %>
+    <tr class="text-center h4">
+      <td align="right", class="d-inline-block bg-dark text-white">模範解答</td>
+      <td><%= @solved_problem.created_problem.model_answer %></td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr class="text-center h4">
+      <td align="right", class="d-inline-block bg-dark text-white">解説</td>
+      <td><%= @solved_problem.created_problem.explanation %></td>
+    </tr>
+  <% else %>
+    <tr class="text-center h4">
+      <td align="right", class="d-inline-block bg-dark text-white">模範解答</td>
+      <td><%= @created_problem.model_answer %></td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr class="text-center h4">
+      <td align="right", class="d-inline-block bg-dark text-white">解説</td>
+      <td><%= @created_problem.explanation %></td>
+    </tr>
   <% end %>
-  <%= link_to "コメントを削除する", comment_path(@solved_problem, @comment), method: :delete %>
-<% else %>
-  <%= form_with model: @comment, url: comments_path(solved_problem_id: @solved_problem.id), method: :post do |f| %>
-    <%= f.text_area :content %>
-    <%= f.submit "コメントする" %>
-  <% end %>
-<% end %>
 
-<% if learner_signed_in? %>
-  <%= link_to "もう一度同じ問題を解く", created_problem_path(@created_problem) %></br>
-  <%= form_with url: created_problems_all_path, method: :get do |f| %>
-    <%= f.hidden_field :subject_name, :value => @solved_problem.created_problem.subject.subject_name %>
-    <%= f.submit "続けて同じ教科の問題を解く" %></br>
-  <% end %></br>
-  <%= form_with url: created_problems_all_path, method: :get do |f| %>
-    <%= f.hidden_field :name, :value => @solved_problem.created_problem.learner.name %>
-    <%= f.submit "続けて同じ作問者の問題を解く" %></br>
-  <% end %></br>
+  <% if learner_signed_in? %>
+  　<tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <% if Comment.exists?(learner_id: current_learner.id, solved_problem_id: @solved_problem.id) %>
+      <%= form_with model: @comment, url: comment_path(@solved_problem, @comment), method: :patch do |f| %>
+        <tr>
+          <td>
+            <%= f.text_area :content, placeholder: 'コメントを入力', style: 'width: 400px; height: 100px;' %>
+          </td>
+          <td>
+            <input class="btn btn-primary" type="submit" value="コメントを修正する">
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td>
+          <%= link_to "コメントを削除する", comment_path(@solved_problem, @comment), method: :delete, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% else %>
+      <%= form_with model: @comment, url: comments_path(solved_problem_id: @solved_problem.id), method: :post do |f| %>
+        <tr>
+          <td>
+            <%= f.text_area :content, placeholder: 'コメントを入力', style: 'width: 300px; height: 100px;' %>
+          </td>
+          <td>
+            　　<input class="btn btn-primary" type="submit" value="コメントする">
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2", align="right">
+      <%= link_to "もう一度同じ問題を解く", created_problem_path(@created_problem), class: 'btn btn-info' %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>
+      <%= form_with url: created_problems_all_path, method: :get do |f| %>
+        <%= f.hidden_field :subject_name, :value => @solved_problem.created_problem.subject.subject_name %>
+        <input class="btn btn-secondary" type="submit" value="続けて同じ教科の問題を解く">
+      <% end %>
+    </td>
+    <td>
+      <%= form_with url: created_problems_all_path, method: :get do |f| %>
+        <%= f.hidden_field :name, :value => @solved_problem.created_problem.learner.name %>
+        <input class="btn btn-secondary" type="submit" value="続けて同じ作問者の問題を解く">
+      <% end %>
+    </td>
+  </tr>
 <% end %>
-<%= link_to "みんなの問題一覧に戻る", created_problems_all_path %>
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right", colspan="2">
+      <%= link_to "みんなの問題一覧に戻る", created_problems_all_path, class: 'link-underline' %>
+    </td>
+  </tr>
+</table>

@@ -1,41 +1,41 @@
-今日のランキング
-<table>
-  <thead>
-    <tr>
-      <th>順位</th>
-      <th>学習者名</th>
-      <th>ポイント合計</th>
+<div class="d-inline-block">
+  <h2 class="bg-primary text-white">ランキング</h2>
+</div>
+
+<table class="text-center">
+  <tr class="h3 bg-dark text-white">
+    <td colspan="3">今日のランキング</td>
+  </tr>
+  <tr class="bg-dark text-white h4">
+    <th>　順位　</th>
+    <th>　学習者名　</th>
+    <th>　獲得ポイント　</th>
+  </tr>
+  <% @point_ranking_today.first(10).each_with_index do |(learner_id, total_points), index| %>
+    <% learner = Learner.find_by(id: learner_id) %>
+    <tr class="h5">
+      <td><%= index + 1 %>　位</td>
+      <td><%= learner.name if learner %>　さん</td>
+      <td><%= total_points %>　pt</td>
     </tr>
-  </thead>
-  <tbody>
-    <% @point_ranking_today.each_with_index do |(learner_id, total_points), index| %>
-      <% learner = Learner.find_by(id: learner_id) %>
-      <tr>
-        <td><%= index + 1 %></td>
-        <td><%= learner.name if learner %></td>
-        <td><%= total_points %></td>
-      </tr>
-    <% end %>
-  </tbody>
+  <% end %>
 </table>
 
-今月のランキング
-<table>
-  <thead>
-    <tr>
-      <th>順位</th>
-      <th>学習者名</th>
-      <th>ポイント合計</th>
+<table class="text-center">
+  <tr class="h3 bg-dark text-white text-center">
+    <td colspan="3">今月のランキング</td>
+  </tr>
+  <tr class="bg-dark text-white h4">
+    <th>　順位　</th>
+    <th>　学習者名　</th>
+    <th>　獲得ポイント　</th>
+  </tr>
+  <% @point_ranking_month.first(10).each_with_index do |(learner_id, total_points), index| %>
+    <% learner = Learner.find_by(id: learner_id) %>
+    <tr class="h5">
+      <td><%= index + 1 %>　位</td>
+      <td><%= learner.name if learner %>　さん</td>
+      <td><%= total_points %>　pt</td>
     </tr>
-  </thead>
-  <tbody>
-    <% @point_ranking_month.each_with_index do |(learner_id, total_points), index| %>
-      <% learner = Learner.find_by(id: learner_id) %>
-      <tr>
-        <td><%= index + 1 %></td>
-        <td><%= learner.name if learner %></td>
-        <td><%= total_points %></td>
-      </tr>
-    <% end %>
-  </tbody>
+  <% end %>
 </table>

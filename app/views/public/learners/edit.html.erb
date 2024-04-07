@@ -1,19 +1,54 @@
-<h2>登録情報変更</h2>
+<div class="d-inline-block">
+  <h2 class="bg-primary text-white">登録情報変更</h2>
+</div>
 
-<%= form_with model: @learner, url: learner_path, method: :patch do |f| %>
-
-ニックネーム
-<%= f.text_field :name %>
-
-ニックネーム　よみがな
-<%= f.text_field :name_kana %>
-
-メールアドレス
-<%= f.email_field :email %>
-
-<%= f.submit "変更する" %>
-
-<% end %>
-
-
-退会を希望する方は<%= link_to "こちら", learners_unsubscribe_path %>
+<table class="h5">
+  <%= form_with model: @learner, url: learner_path, method: :patch do |f| %>
+    <tr>
+      <div class="field">
+        <td align="right">
+          <%= f.label "ニックネーム" %>
+          　　<%= f.text_field :name %>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <div class="field">
+        <td align="right">
+          <%= f.label "ニックネーム　よみがな" %>
+          　　<%= f.text_field :name_kana %>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <div class="field">
+        <td align="right">
+          <%= f.label "メールアドレス" %>
+          　　<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center">
+        <input class="btn btn-primary" type="submit" value="変更する">
+      </td>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">
+      退会を希望する方は<%= link_to "こちら", learners_unsubscribe_path, class: 'link-underline' %>
+    </td>
+  </tr>
+</table>

@@ -1,30 +1,93 @@
+<div class="d-inline-block">
+  <h2 class="bg-primary text-white">問題解答</h2>
+</div>
 <% if SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner&.id, answer_deleted: false) %>
-
-  この問題は解答済みです。</br>
-  もう一度解く場合は、こちらから削除してください。
-
+  <div class="text-center h3">
+    この問題は解答済みです。</br>
+    もう一度解く場合は、こちらから削除してください。
+  </div>
 <% elsif SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner&.id, answer_deleted: true) %>
-<h2>解答画面</h2>
-
-  問題</br>
-  <%= @created_problem.problem %>
-
-  <%= form_with model: @solved_problem, url: solved_problems_reanswer_path(created_problem_id: @created_problem.id), method: :patch do |f| %>
-    解答</br>
-    <%= f.text_field :answer %></br>
-    <%= f.submit "解答する" %>
-  <% end %>
-
+  <table>
+    <tr>
+      <td class="text-center">
+        <h4 class="d-inline-block bg-dark text-white">問題</h4>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="text-center">
+        <h5><%= @created_problem.problem %></h5>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="text-center">
+        <h4 class="d-inline-block bg-dark text-white">解答</h4>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <%= form_with model: @solved_problem, url: solved_problems_reanswer_path(created_problem_id: @created_problem.id), method: :patch do |f| %>
+      <tr>
+        <td class="text-center">
+          <%= f.text_field :answer, placeholder: "ここに解答を入力" %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="number_of_columns">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="text-center">
+          <input class="btn btn-primary" type="submit" value="解答する">
+        </td>
+      </tr>
+    <% end %>
+  </table>
 <% else %>
-<h2>解答画面</h2>
-
-  問題</br>
-  <%= @created_problem.problem %>
-
-  <%= form_with model: @solved_problem, url: solved_problems_answer_path(created_problem_id: @created_problem.id), method: :post do |f| %>
-    解答</br>
-    <%= f.text_field :answer %></br>
-    <%= f.submit "解答する" %>
-  <% end %>
-
+  <table>
+    <tr>
+      <td class="text-center">
+        <h4 class="d-inline-block bg-dark text-white">問題</h4>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="text-center">
+        <h5><%= @created_problem.problem %></h5>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="text-center">
+        <h4 class="d-inline-block bg-dark text-white">解答</h4>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <%= form_with model: @solved_problem, url: solved_problems_answer_path(created_problem_id: @created_problem.id), method: :post do |f| %>
+      <tr>
+        <td class="text-center">
+          <%= f.text_field :answer, placeholder: "ここに解答を入力" %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="number_of_columns">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="text-center">
+          <input class="btn btn-primary" type="submit" value="解答する">
+        </td>
+      </tr>
+    <% end %>
+  </table>
 <% end %>
