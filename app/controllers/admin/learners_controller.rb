@@ -10,6 +10,8 @@ class Admin::LearnersController < ApplicationController
     @point_today = Point.where(learner_id: @learner.id).where("strftime('%Y-%m-%d', created_at) = ?", Date.today.strftime('%Y-%m-%d')).count
     @point_this_month = Point.where(learner_id: @learner.id).where("strftime('%Y-%m', created_at) = ?", Date.today.strftime('%Y-%m')).count
     @point_all = Point.where(learner_id: @learner.id).count
+    @comments_sent = Comment.where(learner_id: @learner.id)
+    @comments_received = Comment.joins(solved_problem: :created_problem).where(created_problems: { learner_id: @learner.id })
   end
 
   def edit

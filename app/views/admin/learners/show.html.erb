@@ -1,5 +1,5 @@
 <div class="d-inline-block">
-  <h2 class="bg-primary text-white">学習者詳細</h2>
+  <h2 class="bg-warning text-white">学習者詳細</h2>
 </div>
 
 <table>
@@ -86,4 +86,48 @@
       <%= paginate @created_problems %>
     </td>
   </tr>
+</table>
+
+<table class="text-center">
+  <tr class="h3 bg-dark text-white">
+    <td colspan="4"><%= @learner.name %>さんが送ったコメント</td>
+  </tr>
+  <tr class="bg-dark text-white h5 table-bordered border-dark">
+    <th>　日時　</th>
+    <th>　問題　</th>
+    <th>　作問者　</th>
+    <th>　コメント内容　</th>
+  </tr>
+  <% @comments_sent.each_slice(5) do |row| %>
+    <% row.each do |comment| %>
+      <tr class="table-bordered border-dark">
+        <td><%= comment.created_at.strftime("%Y/%m/%d　%H:%M") %></td>
+        <td><%= comment.solved_problem.created_problem.problem %></td>
+        <td><%= comment.solved_problem.created_problem.learner.name %></td>
+        <td><%= comment.content %></td>
+      </tr>
+    <% end %>
+  <% end %>
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <tr class="h3 bg-dark text-white">
+    <td colspan="4"><%= @learner.name %>さんに届いたコメント一覧</td>
+  </tr>
+  <tr class="bg-dark text-white h5 table-bordered border-dark">
+    <th>　日時　</th>
+    <th>　問題　</th>
+    <th>　送り主　</th>
+    <th>　コメント内容　</th>
+  </tr>
+  <% @comments_received.each_slice(5) do |row| %>
+    <% row.each do |comment| %>
+      <tr class="table-bordered border-dark">
+        <td><%= comment.created_at.strftime("%Y/%m/%d　%H:%M") %></td>
+        <td><%= comment.solved_problem.created_problem.problem %></td>
+        <td><%= comment.solved_problem.learner.name %></td>
+        <td><%= comment.content %></td>
+      </tr>
+    <% end %>
+  <% end %>
 </table>
