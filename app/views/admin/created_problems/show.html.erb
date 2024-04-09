@@ -1,18 +1,53 @@
-<h2>投稿問題詳細画面</h2>
+<div class="d-inline-block">
+  <h2 class="bg-warning text-white">投稿問題詳細</h2>
+</div>
 
-教科　<%= @created_problem.subject.subject_name %></br>
-問題　<%= @created_problem.problem %></br>
-作問者　<%= @created_problem.learner.name %></br>
-いいね数　<%= @created_problem.favorites.count %></br>
-模範解答　<%= @created_problem.model_answer %></br>
-解説　<%= @created_problem.explanation %></br>
-獲得ポイント　<%= @points %></br>
-公開ステータス
-  <% if @created_problem.is_release == true %>
-    公開中</br>
-  <% else %>
-    非公開中</br>
-  <% end %>
-投稿日時　<%= @created_problem.created_at %></br>
-
-<%= link_to "編集する", edit_admin_created_problem_path %></br>
+<table class="table table-hover table-inverse">
+  <tr class="table-bordered border-dark">
+    <td align="right", class="h3">教科</td>
+    <td align="left", class="h4">　<%= @created_problem.subject.subject_name %></td>
+  </tr>
+  <tr class="table-bordered border-dark">
+    <td align="right", class="h3">問題</td>
+    <td align="left", class="h4">　<%= @created_problem.problem %></td>
+  </tr>
+  <tr class="table-bordered border-dark">
+    <td align="right", class="h3">作問者</td>
+    <td align="left", class="h4">　<%= @created_problem.learner.name %></td>
+  </tr>
+  <tr class="table-bordered border-dark">
+    <td align="right", class="h3">いいね数</td>
+    <td align="left", class="h4">　<%= @created_problem.favorites.count %></td>
+  </tr>
+  <tr class="table-bordered border-dark">
+    <td align="right", class="h3">模範解答</td>
+    <td align="left", class="h4">　<%= @created_problem.model_answer %></td>
+  </tr>
+  <tr class="table-bordered border-dark">
+    <td align="right", class="h3">解説</td>
+    <td align="left", class="h4">　<%= @created_problem.explanation %></td>
+  </tr>
+  <tr class="table-bordered border-dark">
+    <td align="right", class="h3">獲得ポイント</td>
+    <td align="left", class="h4">　<%= @points %>pt</td>
+  </tr>
+  <tr class="table-bordered border-dark">
+    <td align="right", class="h3">公開ステータス</td>
+    <td align="left", class="h4">
+      <% if @created_problem.is_release == true %>
+        　公開中
+      <% else %>
+        　非公開中
+      <% end %>
+    </td>
+  </tr>
+  <tr class="table-bordered border-dark">
+    <td align="right", class="h3">投稿日時</td>
+    <td align="left", class="h4">　<%= @created_problem.created_at.strftime("%Y/%m/%d　%H:%M") %></td>
+  </tr>
+  <tr>
+    <td colspan="2", align="right">
+      <%= link_to "編集する", edit_admin_created_problem_path(@created_problem), class: "btn btn-warning" %>
+    </td>
+  </tr>
+</table>

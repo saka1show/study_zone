@@ -84,15 +84,15 @@
       <div class="col-2 bg-secondary">
         <div class="row sidebar-button pt-4">
           <% if admin_signed_in? %>
-            <%= link_to "ランキング詳細", admin_points_path, class:'sidebar-buttons', role:'button' %></br>
+            <%= link_to "ランキング　トップ１０", admin_points_path, class:'sidebar-buttons', role:'button' %></br>
           <% elsif learner_signed_in? %>
-            <%= link_to "ランキング詳細", points_ranking_path, class:'sidebar-buttons', role:'button' %></br>
+            <%= link_to "ランキング　トップ１０", points_ranking_path, class:'sidebar-buttons', role:'button' %></br>
           <% else %>
-            <%= link_to "ランキング詳細", points_ranking_path, class:'sidebar-buttons', role:'button' %></br>
+            <%= link_to "ランキング　トップ１０", points_ranking_path, class:'sidebar-buttons', role:'button' %></br>
           <% end %>
         </div>
           <div class="sidebar-table">
-            <h5><strong>今日のランキング</strong></h5>
+            <h5 class="d-inline-block bg-success text-white"><strong>今日のランキング</strong></h5>
             <% @point_ranking_today.each_slice(3) do |slice| %>
               <% slice.each_with_index do |(learner_id, total_points), index| %>
                 <% learner = Learner.find_by(id: learner_id) %>
@@ -101,7 +101,7 @@
             <% end %>
           </div>
           <div class="sidebar-table">
-            <h5><strong>今月のランキング</strong></h5>
+            <h5 class="d-inline-block bg-info text-white"><strong>今月のランキング</strong></h5>
             <% @point_ranking_month.each_slice(3) do |slice| %>
               <% slice.each_with_index do |(learner_id, total_points), index| %>
                 <% learner = Learner.find_by(id: learner_id) %>

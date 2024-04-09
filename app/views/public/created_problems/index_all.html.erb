@@ -1,6 +1,12 @@
-<div class="d-inline-block">
-  <h2 class="bg-primary text-white">みんなの問題一覧</h2>
-</div>
+<% if admin_signed_in? %>
+  <div class="d-inline-block">
+    <h2 class="bg-warning text-white">みんなの問題一覧</h2>
+  </div>
+<% else %>
+  <div class="d-inline-block">
+    <h2 class="bg-primary text-white">みんなの問題一覧</h2>
+  </div>
+<% end %>
 
 <div class="border border-5 bg-light pb-3">
   <table>
@@ -70,8 +76,9 @@
         <td><%= link_to "詳細", admin_created_problem_path(created_problem.id), class: "btn btn-success" %></td>
       <% else %>
       <% end %>
-      <% if created_problem.learner_id == current_learner&.id or admin_signed_in? %>
+      <% if created_problem.learner_id == current_learner&.id %>
         <td class="text-secondary">自分が作成</td>
+      <% elsif admin_signed_in? %>
       <% else %>
         <% if SolvedProblem.exists?(created_problem_id: created_problem.id, learner_id: current_learner&.id, answer_deleted: false) %>
           <td class="text-warning">解答済み</td>

@@ -1,16 +1,43 @@
-<h2>管理者登録情報変更</h2>
+<div class="d-inline-block">
+  <h2 class="bg-warning text-white">管理者登録情報変更</h2>
+</div>
 
-<%= form_with model: @admin, url: admin_admin_path, method: :patch do |f| %>
-
-管理者名
-<%= f.text_field :name %>
-
-メールアドレス
-<%= f.email_field :email %>
-
-<%= f.submit "変更する" %>
-
-<% end %>
-
-
-退会を希望する方は<%= link_to "こちら", admin_admin_unsubscribe_path %>
+<table class="h5">
+  <%= form_with model: @admin, url: admin_admin_path, method: :patch do |f| %>
+    <tr>
+      <div class="field">
+        <td align="right">
+          <%= f.label "管理者名" %>
+          　　<%= f.text_field :name %>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <div class="field">
+        <td align="right">
+          <%= f.label "メールアドレス" %>
+          　　<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center">
+        <input class="btn btn-warning" type="submit" value="変更する">
+      </td>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">
+      退会を希望する方は<%= link_to "こちら", admin_admin_unsubscribe_path, class: 'link-underline' %>
+    </td>
+  </tr>
+</table>

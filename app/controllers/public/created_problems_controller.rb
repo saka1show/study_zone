@@ -42,21 +42,21 @@ class Public::CreatedProblemsController < ApplicationController
   def index_all
     @subjects = Subject.all
       if params[:problem].present? && params[:subject_name].present? && params[:name].present?
-        @created_problems = CreatedProblem.joins(:subject, :learner).where("problem LIKE ?", "%#{params[:problem]}%").where(subjects: { subject_name: params[:subject_name]}).where(learner: { name: params[:name]}).page(params[:page]).order(created_at: :desc)
+        @created_problems = CreatedProblem.joins(:subject, :learner).where("problem LIKE ?", "%#{params[:problem]}%").where(subjects: { subject_name: params[:subject_name]}).where(learner: { name: params[:name]}).page(params[:page]).per(10).order(created_at: :desc)
       elsif params[:problem].present? && params[:subject_name].present?
-        @created_problems = CreatedProblem.joins(:subject).where("problem LIKE ?", "%#{params[:problem]}%").where(subjects: { subject_name: params[:subject_name]}).page(params[:page]).order(created_at: :desc)
+        @created_problems = CreatedProblem.joins(:subject).where("problem LIKE ?", "%#{params[:problem]}%").where(subjects: { subject_name: params[:subject_name]}).page(params[:page]).per(10).order(created_at: :desc)
       elsif params[:problem].present? && params[:name].present?
-        @created_problems = CreatedProblem.joins(:learner).where("problem LIKE ?", "%#{params[:problem]}%").where(learner: { name: params[:name]}).page(params[:page]).order(created_at: :desc)
+        @created_problems = CreatedProblem.joins(:learner).where("problem LIKE ?", "%#{params[:problem]}%").where(learner: { name: params[:name]}).page(params[:page]).per(10).order(created_at: :desc)
       elsif params[:subject_name].present? && params[:name].present?
-        @created_problems = CreatedProblem.joins(:subject, :learner).where(subjects: { subject_name: params[:subject_name]}).where(learner: { name: params[:name]}).page(params[:page]).order(created_at: :desc)
+        @created_problems = CreatedProblem.joins(:subject, :learner).where(subjects: { subject_name: params[:subject_name]}).where(learner: { name: params[:name]}).page(params[:page]).per(10).order(created_at: :desc)
       elsif params[:problem].present?
-        @created_problems = CreatedProblem.where("problem LIKE ?", "%#{params[:problem]}%").page(params[:page]).order(created_at: :desc)
+        @created_problems = CreatedProblem.where("problem LIKE ?", "%#{params[:problem]}%").page(params[:page]).per(10).order(created_at: :desc)
       elsif params[:subject_name].present?
-        @created_problems = CreatedProblem.joins(:subject).where(subjects: { subject_name: params[:subject_name] }).page(params[:page]).order(created_at: :desc)
+        @created_problems = CreatedProblem.joins(:subject).where(subjects: { subject_name: params[:subject_name] }).page(params[:page]).per(10).order(created_at: :desc)
       elsif params[:name].present?
-        @created_problems = CreatedProblem.joins(:learner).where(learner: { name: params[:name]}).page(params[:page]).order(created_at: :desc)
+        @created_problems = CreatedProblem.joins(:learner).where(learner: { name: params[:name]}).page(params[:page]).per(10).order(created_at: :desc)
       else
-        @created_problems = CreatedProblem.page(params[:page]).order(created_at: :desc)
+        @created_problems = CreatedProblem.page(params[:page]).per(10).order(created_at: :desc)
       end
   end
 

@@ -72,30 +72,32 @@
       </tr>
       <%= form_with model: @comment, url: comment_path(@solved_problem, @comment), method: :patch do |f| %>
         <tr>
-          <td>
+          <td colspan="2", align="center">
             <%= f.text_area :content, placeholder: 'コメントを入力', style: 'width: 400px; height: 100px;' %>
           </td>
-          <td>
+        </tr>
+        <tr>
+          <td align="right">
             <input class="btn btn-primary" type="submit" value="コメントを修正する">
           </td>
-        </tr>
       <% end %>
-      <tr>
-        <td>
-          <%= link_to "コメントを削除する", comment_path(@solved_problem, @comment), method: :delete, class: 'btn btn-danger' %>
-        </td>
-      </tr>
+          <td align="left">
+            　<%= link_to "コメントを削除する", comment_path(@solved_problem, @comment), method: :delete, class: 'btn btn-danger' %>
+          </td>
+        </tr>
     <% else %>
       <tr>
         <td colspan="number_of_columns">&nbsp;</td>
       </tr>
       <%= form_with model: @comment, url: comments_path(solved_problem_id: @solved_problem.id), method: :post do |f| %>
         <tr>
-          <td>
+          <td colspan="2", align="center">
             <%= f.text_area :content, placeholder: 'コメントを入力', style: 'width: 300px; height: 100px;' %>
           </td>
-          <td>
-            　　<input class="btn btn-primary" type="submit" value="コメントする">
+        </tr>
+        <tr>
+          <td colspan="2", align="center">
+            <input class="btn btn-primary" type="submit" value="コメントする">
           </td>
         </tr>
       <% end %>
@@ -103,7 +105,7 @@
   <tr>
     <td colspan="number_of_columns">&nbsp;</td>
   </tr>
-  <tr>
+  <tr align="center">
     <td>
       <%= form_with url: created_problems_all_path, method: :get do |f| %>
         <%= f.hidden_field :subject_name, :value => @solved_problem.created_problem.subject.subject_name %>

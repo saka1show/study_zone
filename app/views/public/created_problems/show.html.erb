@@ -76,8 +76,6 @@
     </tr>
   <% end %>
 
-
-
   <tr class="table-bordered border-dark">
     <td align="right", class="h3">公開ステータス</td>
     <td align="left", class="h4">
@@ -90,7 +88,7 @@
   </tr>
   <tr class="table-bordered border-dark">
     <td align="right", class="h3">投稿日時</td>
-    <td align="left", class="h4">　<%= @created_problem.created_at.strftime("%Y/%m/%d") %></td>
+    <td align="left", class="h4">　<%= @created_problem.created_at.strftime("%Y/%m/%d　%H:%M") %></td>
   </tr>
 
   <% if @created_problem.learner_id == current_learner.id %>

@@ -1,25 +1,22 @@
-<h2>教科編集</h2>
+<div class="d-inline-block">
+  <h3 class="bg-warning text-white mt-5">教科編集</h3>
+</div>
 
 <%= form_with model: @subject, url: admin_subject_path, method: :patch do |f| %>
-  教科</br>
-  <%= f.text_field :subject_name %></br>
-
-  <%= f.submit "更新する" %>
-
+  教科名　<%= f.text_field :subject_name %>
+  　　<input class="btn btn-warning" type="submit" value="更新する">
 <% end %>
 
 <table class="table table-hover table-inverse">
-  <tr>
-    <th>作問者</th>
-    <th>教科</th>
-    <th>問題</th>
-    <th>ステータス</th>
+  <tr class="bg-dark text-white h5 table-bordered border-dark">
+    <th style="text-align: center;">作問者</th>
+    <th style="text-align: center;">問題</th>
+    <th colspan="2">ステータス</th>
   </tr>
   <% @created_problems.each_slice(5) do |row| %>
     <% row.each do |created_problem| %>
     <tr>
       <td><%= created_problem.learner.name %></td>
-      <td><%= created_problem.subject.subject_name %></td>
       <td><%= created_problem.problem %></td>
       <td>
         <% if created_problem.is_release == true %>
@@ -27,6 +24,9 @@
         <% else %>
           非公開中
         <% end %>
+      </td>
+      <td>
+        <%= link_to "詳細", admin_created_problem_path(created_problem.id), class: "btn btn-success" %>
       </td>
     </tr>
     <% end %>

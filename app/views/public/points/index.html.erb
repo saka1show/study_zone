@@ -1,21 +1,24 @@
-<h2>ポイント獲得履歴</h2>
+<div class="d-inline-block">
+  <h2 class="bg-primary text-white">ポイント獲得履歴</h2>
+</div>
 
 <table class="table table-hover table-inverse">
-  <tr>
-    <th>獲得日時</th>
-    <th>種別</th>
-    <th>作問者/問題を解いた人</th>
-    <th>問題の詳細</th>
+  <tr class="bg-dark text-white h5 table-bordered border-dark">
+    <th style="text-align: center;">獲得日時</th>
+    <th style="text-align: center;">種別</th>
+    <th style="text-align: center;">作問者/問題を解いた人</th>
+    <th style="text-align: center;">問題の詳細</th>
+  </tr>
   </tr>
   <% @points.each_slice(10) do |row| %>
     <% row.each do |point| %>
     <tr>
-      <td><%= point.created_at %></td>
+      <td><%= point.created_at.strftime("%Y/%m/%d　%H:%M") %></td>
       <td>
         <% if point.owner == false %>
-          問題が解かれた
+          <p class="text-secondary">問題が解かれた</p>
         <% else %>
-          問題を解いた
+          <p class="text-info">問題を解いた</p>
         <% end %>
       </td>
       <% if point.solved_problem %>
@@ -25,7 +28,7 @@
           <td><%= point.solved_problem.learner.name %></td>
         <% end %>
         <td>
-          <%= link_to "詳細", created_problem_path(point.solved_problem.created_problem_id) %>
+          <%= link_to "詳細", created_problem_path(point.solved_problem.created_problem_id), class: 'btn btn-success' %>
         </td>
       <% else %>
         <td>問題は削除または非公開</td>
