@@ -1,0 +1,114 @@
+<div class="d-inline-block">
+  <h2 class="bg-primary text-white">投稿問題詳細</h2>
+</div>
+
+<table class="table table-hover table-inverse">
+  <tr class="table-bordered border-dark">
+    <td align="right", class="h3">教科</td>
+    <td align="left", class="h4">　<%= @created_problem.subject.subject_name %></td>
+  </tr>
+  <tr class="table-bordered border-dark">
+    <td align="right", class="h3">問題</td>
+    <td align="left", class="h4">　<%= @created_problem.problem %></td>
+  </tr>
+
+  <% if @created_problem.learner_id == current_learner.id %>
+  <% else %>
+    <tr class="table-bordered border-dark">
+      <td align="right", class="h3">作問者</td>
+      <td align="left", class="h4">　<%= @created_problem.learner.name %></td>
+    </tr>
+  <% end %>
+  <tr class="table-bordered border-dark">
+    <td align="right", class="h3">いいね数</td>
+    <td align="left", class="h4">　<%= @created_problem.favorites.count %></td>
+  </tr>
+
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+
+  <% if SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner.id, answer: "UnKnOwN" ) %>
+  <% elsif SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner.id) %>
+    <tr class="table-bordered border-dark">
+      <td align="right", class="h3">模範解答</td>
+      <td align="left", class="h4">　<%= @created_problem.model_answer %></td>
+    </tr>
+    <tr class="table-bordered border-dark">
+      <td align="right", class="h3">自分の解答</td>
+      <td align="left", class="h4">　<%= @solved_problem.answer %></td>
+    </tr>
+    <tr class="table-bordered border-dark">
+      <td align="right", class="h3">現在の解答ステータス</td>
+      <td align="left", class="h4">
+        <% if @solved_problem.answer_status == true %>
+        　正解
+        <% else %>
+        　不正解
+        <% end %>
+      </td>
+    </tr>
+    <tr class="table-bordered border-dark">
+      <td align="right", class="h3">解説</td>
+      <td align="left", class="h4">　<%= @created_problem.explanation %></td>
+    </tr>
+    <tr class="table-bordered border-dark">
+      <td align="right", colspan="2">
+        解答情報を削除するともう一度この問題を解くことができます。</br>
+        （※現在のステータスが正解の場合、ポイントが消えます）
+      </td>
+    </tr>
+    <tr class="table-bordered border-dark">
+      <td align="right", colspan="2">
+        <%= form_with model: @solved_problem, url: solved_problem_path, method: :patch do |f| %>
+          <%= f.hidden_field :answer_deleted, :value => true %>
+          <%= f.hidden_field :learner_id %>
+          <%= f.hidden_field :created_problem_id %>
+          <%= f.hidden_field :answer, :value => "UnKnOwN" %>
+          <%= f.hidden_field :answer_status, :value => false %>
+          <%= f.hidden_field :answer_deleted, :value => true %>
+          <%= f.submit "解答情報を削除する", class: 'btn btn-danger' %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+  <% end %>
+
+  <tr class="table-bordered border-dark">
+    <td align="right", class="h3">公開ステータス</td>
+    <td align="left", class="h4">
+      <% if @created_problem.is_release == true %>
+        　公開中
+      <% else %>
+        　非公開中
+      <% end %>
+    </td>
+  </tr>
+  <tr class="table-bordered border-dark">
+    <td align="right", class="h3">投稿日時</td>
+    <td align="left", class="h4">　<%= @created_problem.created_at.strftime("%Y/%m/%d　%H:%M") %></td>
+  </tr>
+
+  <% if @created_problem.learner_id == current_learner.id %>
+    <tr class="table-bordered border-dark">
+      <td align="right", class="h3">模範解答</td>
+      <td align="left", class="h4">　<%= @created_problem.model_answer %></td>
+    </tr>
+    <tr class="table-bordered border-dark">
+      <td align="right", class="h3">解説</td>
+      <td align="left", class="h4">　<%= @created_problem.explanation %></td>
+    </tr>
+    <tr class="table-bordered border-dark">
+      <td align="right", class="h3">獲得ポイント</td>
+      <td align="left", class="h4">　<%= @points %>pt</td>
+    </tr>
+    <tr>
+      <td align="right", colspan="2">
+        <%= link_to "投稿問題の内容を編集する", edit_created_problem_path, class: 'btn btn-primary' %>
+      </td>
+    </tr>
+  <% else %>
+  <% end %>
+</table>

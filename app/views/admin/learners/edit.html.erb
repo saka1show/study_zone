@@ -1,0 +1,68 @@
+<div class="d-inline-block">
+  <h2 class="bg-warning text-white">学習者登録情報変更</h2>
+</div>
+
+<table class="h5">
+  <%= form_with model: @learner, url: admin_learner_path, method: :patch do |f| %>
+    <tr>
+      <div class="field">
+        <td align="right">
+          <%= f.label "ニックネーム" %>
+        </td>
+        <td align="left">
+          　　<%= f.text_field :name %>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <div class="field">
+        <td align="right">
+          <%= f.label "ニックネーム　よみがな" %>
+        </td>
+        <td align="left">
+          　　<%= f.text_field :name_kana %>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <div class="field">
+        <td align="right">
+          <%= f.label "メールアドレス" %>
+        </td>
+        <td align="left">
+          　　<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <div class="field">
+        <td align="right">
+          <%= f.label "ステータス" %>
+        </td>
+        <td align="center">
+          <%= f.radio_button :is_active, true %>
+            <%= f.label :is_active, "有効化" %>
+        　　<%= f.radio_button :is_active, false %>
+              <%= f.label :is_active, "退会処理" %>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center", colspan="2">
+        <input class="btn btn-warning" type="submit" value="学習者情報を変更する">
+      </td>
+    </tr>
+  <% end %>
+ </table>

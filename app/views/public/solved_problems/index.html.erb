@@ -1,0 +1,39 @@
+<div class="d-inline-block">
+  <h2 class="bg-primary text-white">解いた問題一覧</h2>
+</div>
+
+<div class="text-right">
+  <%= form_with url: solved_problems_path, method: :get do |f| %>
+    <%= f.hidden_field :learner_id, :value => current_learner.id %>
+    <%= f.submit "いいねした問題のみ表示する", class: 'btn btn-info' %>
+  <% end %>
+</div>
+
+<% if SolvedProblem.exists?(learner_id: current_learner.id) %>
+  <table class="table table-hover table-inverse">
+    <tr class="bg-dark text-white h5 table-bordered border-dark">
+      <th style="text-align: center;">作問者</th>
+      <th style="text-align: center;">教科</th>
+      <th colspan="3">問題</th>
+    </tr>
+    <% @solved_problems.each_slice(10) do |row| %>
+    <% row.each do |solved_problem| %>
+      <tr>
+        <td><%= solved_problem.created_problem.learner.name %></td>
+        <td><%= solved_problem.created_problem.subject.subject_name %></td>
+        <td><%= solved_problem.created_problem.problem %></td>
+        <td><%= link_to "詳細", created_problem_path(solved_problem.created_problem.id), class: 'btn btn-success' %></td>
+        <td>
+          <% if solved_problem.answer_deleted %>
+            解答情報削除済み　再回答可能
+          <% else %>
+            解答済み
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+  </table>
+<% else %>
+  まだありません。みんなの問題から解いてみましょう！
+<% end %>

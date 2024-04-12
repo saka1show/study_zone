@@ -1,0 +1,18 @@
+<div class="d-inline-block">
+  <h2 class="bg-warning text-white">管理者マイページ</h2>
+</div>
+
+<table>
+  <tr>
+    <td align="right", class="h3">管理者名</td>
+    <td align="left", class="h4">　<%= @admin.name %></td>
+  </tr>
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <tr>
+    <td  align="right", colspan="2">
+      登録情報の変更及び退会手続は<%= link_to "こちら", edit_admin_admin_path, class: 'link-underline' %>
+    </td>
+  </tr>
+</table>
