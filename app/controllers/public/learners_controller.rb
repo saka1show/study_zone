@@ -2,8 +2,8 @@ class Public::LearnersController < ApplicationController
 
   def show
     @learner = current_learner
-    @point_today = Point.where(learner_id: current_learner.id).where("strftime('%Y-%m-%d', created_at) = ?", Date.today.strftime('%Y-%m-%d')).count
-    @point_this_month = Point.where(learner_id: current_learner.id).where("strftime('%Y-%m', created_at) = ?", Date.today.strftime('%Y-%m')).count
+    @point_today = Point.where(learner_id: current_learner.id).where("DATE_FORMAT(created_at, '%Y-%m-%d') = ?", Date.today).count
+    @point_this_month = Point.where(learner_id: current_learner.id).where("DATE_FORMAT(created_at, '%Y-%m') = ?", Date.today).count
     @point_all = Point.where(learner_id: current_learner.id).count
   end
 
