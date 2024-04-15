@@ -115,7 +115,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    listen (3.8.0)
+    listen (3.3.4)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.22.0)
@@ -266,7 +266,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   kaminari (~> 1.2.1)
-  listen (~> 3.3)
+  listen (~> 3.3.1)
   mysql2
   net-imap
   net-pop
