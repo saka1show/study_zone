@@ -6,4 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Subject.create(subject_name: "数学")
+subjects = [
+  { subject_name: '国語' },
+  { subject_name: '数学' },
+  { subject_name: '理科' },
+  { subject_name: '社会' },
+  { subject_name: '英語' },
+  { subject_name: '情報' },
+  { subject_name: 'その他' }
+]
+
+subjects.each do |subjects|
+  Subject.find_or_create_by!(subject)
+end
