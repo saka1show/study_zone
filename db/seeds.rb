@@ -12,7 +12,7 @@ subjects = [
   { subject_name: '理科' },
   { subject_name: '社会' },
   { subject_name: '英語' },
-  { subject_name: '情報' },
+  { subject_name: '副教科' },
   { subject_name: 'その他' }
 ]
 
