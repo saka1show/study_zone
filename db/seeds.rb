@@ -16,6 +16,6 @@ subjects = [
   { subject_name: 'その他' }
 ]
 
-subjects.each do |subjects|
+subjects.each do |subject|
   Subject.find_or_create_by!(subject)
 end
