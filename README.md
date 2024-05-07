@@ -26,17 +26,14 @@
 ​
 ## 設計書
 
-後ほど作成予定
-​
+https://drive.google.com/drive/folders/19slKYC8IG1hP-bqLc2QUH-qeeeIMWkOV?usp=sharing
+
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
-​
-## 使用素材
-検討中
 
 ## 実装機能リスト
 https://docs.google.com/spreadsheets/d/1_2aC2--PGYZ-7c5rBC7mRd2oAbLI-w5yNKmnDny057I/edit?usp=sharing
