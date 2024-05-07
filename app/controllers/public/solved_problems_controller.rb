@@ -150,7 +150,7 @@ class Public::SolvedProblemsController < ApplicationController
 
   def index
     if params[:learner_id].present?
-      @solved_problems = SolvedProblem.joins(created_problem: :favorites).where(favorites: { learner_id: params[:learner_id]}).where(learner_id: current_learner.id).order(created_at: :desc)
+      @solved_problems = SolvedProblem.joins(created_problem: :favorites).where(favorites: { learner_id: params[:learner_id]}).where(learner_id: current_learner.id)order(created_at: :desc)
     else
       @solved_problems = SolvedProblem.where(learner_id: current_learner.id).where(answer_deleted: false).order(created_at: :desc)
     end
