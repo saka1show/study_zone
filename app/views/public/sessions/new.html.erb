@@ -2,8 +2,8 @@
   <h2 class="bg-primary text-white">ログイン</h2>
 </div>
 
-<table class="h5">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <table class="h5">
     <tr>
       <div class="field">
         <td align="right">
@@ -29,7 +29,7 @@
           <td align="right">
             <%= f.check_box :remember_me %>
             <%= f.label :"パスワードを記憶する" %>
-          </tr>
+          </td>
         </div>
       <% end %>
     </tr>
@@ -41,13 +41,13 @@
         <input class="btn btn-primary" type="submit" value="ログイン">
       </td>
     </tr>
-  <% end %>
-  <tr>
-    <td colspan="number_of_columns">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="right">
-      新規登録をされる方は<%= link_to "こちら", new_learner_registration_path, class: 'link-underline' %>
-    </td>
-  </tr>
-</table>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="right">
+        新規登録をされる方は<%= link_to "こちら", new_learner_registration_path, class: 'link-underline' %>
+      </td>
+    </tr>
+  </table>
+<% end %>

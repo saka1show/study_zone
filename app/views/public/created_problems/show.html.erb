@@ -1,5 +1,11 @@
 <div class="d-inline-block">
-  <h2 class="bg-primary text-white">投稿問題詳細</h2>
+  <h2 class="bg-primary text-white">
+    <% if SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner.id) %>
+      解いた問題の詳細
+    <% else %>
+      投稿問題詳細
+    <% end %>
+  </h2>
 </div>
 
 <table class="table table-hover table-inverse">
@@ -23,13 +29,11 @@
     <td align="right", class="h3">いいね数</td>
     <td align="left", class="h4">　<%= @created_problem.favorites.count %></td>
   </tr>
+</table>
 
-  <tr>
-    <td colspan="number_of_columns">&nbsp;</td>
-  </tr>
-
-  <% if SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner.id, answer: "UnKnOwN" ) %>
-  <% elsif SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner.id) %>
+<% if SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner.id, answer: "UnKnOwN" ) %>
+<% elsif SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner.id) %>
+  <table class="table table-hover table-inverse">
     <tr class="table-bordered border-dark">
       <td align="right", class="h3">模範解答</td>
       <td align="left", class="h4">　<%= @created_problem.model_answer %></td>
@@ -52,15 +56,18 @@
       <td align="right", class="h3">解説</td>
       <td align="left", class="h4">　<%= @created_problem.explanation %></td>
     </tr>
-    <tr class="table-bordered border-dark">
-      <td align="right", colspan="2">
-        解答情報を削除するともう一度この問題を解くことができます。</br>
-        （※現在のステータスが正解の場合、ポイントが消えます）
-      </td>
-    </tr>
-    <tr class="table-bordered border-dark">
-      <td align="right", colspan="2">
-        <%= form_with model: @solved_problem, url: solved_problem_path, method: :patch do |f| %>
+  </table>
+
+  <%= form_with model: @solved_problem, url: solved_problem_path, method: :patch do |f| %>
+    <table class="table table-hover table-inverse">
+      <tr class="table-bordered border-dark">
+        <td align="right", colspan="2">
+          解答情報を削除するともう一度この問題を解くことができます。</br>
+          （※現在のステータスが正解の場合、ポイントが消えます）
+        </td>
+      </tr>
+      <tr class="table-bordered border-dark">
+        <td align="right", colspan="2">
           <%= f.hidden_field :answer_deleted, :value => true %>
           <%= f.hidden_field :learner_id %>
           <%= f.hidden_field :created_problem_id %>
@@ -68,14 +75,13 @@
           <%= f.hidden_field :answer_status, :value => false %>
           <%= f.hidden_field :answer_deleted, :value => true %>
           <%= f.submit "解答情報を削除する", class: 'btn btn-danger' %>
-        <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="number_of_columns">&nbsp;</td>
-    </tr>
+        </td>
+      </tr>
+    </table>
   <% end %>
+<% end %>
 
+<table class="table table-hover table-inverse">
   <tr class="table-bordered border-dark">
     <td align="right", class="h3">公開ステータス</td>
     <td align="left", class="h4">

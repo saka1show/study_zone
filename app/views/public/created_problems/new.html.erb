@@ -2,8 +2,8 @@
   <h2 class="bg-primary text-white">問題新規投稿</h2>
 </div>
 <% if learner_signed_in? %>
-  <table>
-    <%= form_with model: @created_problem, url: created_problems_path, method: :post do |f| %>
+  <%= form_with model: @created_problem, url: created_problems_path, method: :post do |f| %>
+    <table>
       <tr>
         <td class="text-right">
           <h4 class="d-inline-block bg-dark text-white">教科</h4>
@@ -53,8 +53,8 @@
           <input class="btn btn-primary" type="submit" value="投稿する">
         </td>
       </tr>
-    <% end %>
-  </table>
+    </table>
+  <% end %>
 <% else %>
   <div class="h2 text-center pt-5">
     <p class="pt-4">問題新規投稿機能はログイン後に利用可能です。</p>
