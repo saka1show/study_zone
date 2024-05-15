@@ -63,8 +63,13 @@
     <tr>
       <td align="center", colspan="2">
         <input class="btn btn-primary" type="submit" value="更新する">
-        　<%= link_to "削除する", created_problem_path, method: :delete, class: 'btn btn-danger' %>
       </td>
     </tr>
   </table>
 <% end %>
+<div class="text-right">
+  <%= form_with model: @created_problem, url: created_problem_path, method: :patch do |f| %>
+    <%= f.hidden_field :delete_status, :value => true %>
+    <input class="btn btn-danger" type="submit" value="削除する">
+  <% end %>
+</div>

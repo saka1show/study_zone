@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
     resources :learners, only: [:show, :edit, :update]
     resources :points, only: [:index]
-    resources :created_problems, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+    resources :created_problems, only: [:new, :create, :index, :show, :edit, :update] do
       resource :favorites, only: [:create, :destroy]
     end
     resources :solved_problems, only: [:new, :index, :update]
