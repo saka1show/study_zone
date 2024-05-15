@@ -2,8 +2,8 @@
   <h2 class="bg-warning text-white">学習者登録情報変更</h2>
 </div>
 
-<table class="h5">
-  <%= form_with model: @learner, url: admin_learner_path, method: :patch do |f| %>
+<%= form_with model: @learner, url: admin_learner_path, method: :patch do |f| %>
+  <table class="h5">
     <tr>
       <div class="field">
         <td align="right">
@@ -64,5 +64,5 @@
         <input class="btn btn-warning" type="submit" value="学習者情報を変更する">
       </td>
     </tr>
-  <% end %>
- </table>
+  </table>
+<% end %>
