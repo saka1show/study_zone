@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :subjects, only: [:new, :create, :index, :edit, :update]
     resources :points, only: [:index]
     resources :created_problems, only: [:index, :show, :edit, :update, :destroy]
+    resources :comments, only: [:destroy]
   end
 
   scope module: :public do

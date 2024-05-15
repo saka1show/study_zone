@@ -45,6 +45,7 @@
       <div class="col-2">
         <%= form_with model: @solved_problem, url: solved_problems_re_correct_path(id: @solved_problem) do |f| %>
           <%= f.hidden_field :answer_deleted, :value => false %>
+          <%= f.hidden_field :answer_status , :value => true %>
           <% f.fields_for :point do |point_form| %>
             <%= point_form.hidden_field :learner_id, value: current_learner.id %>
             <%= point_form.hidden_field :solved_problem_id, value: @solved_problem.id %>

@@ -53,7 +53,6 @@
         <%= f.text_area :content, placeholder: 'コメントを入力', style: 'width: 150%; height: 100px;' %>
         <input class="btn btn-primary" type="submit" value="コメントを修正する">
       <% end %>
-        <%= link_to "コメントを削除する", comment_path(@solved_problem, @comment), method: :delete, class: 'btn btn-danger' %>
     <% else %>
       <%= form_with model: @comment, url: comments_path(solved_problem_id: @solved_problem.id), method: :post do |f| %>
         <%= f.text_area :content, placeholder: 'コメントを入力', style: 'width: 150%; height: 100px;' %>

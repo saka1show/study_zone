@@ -4,13 +4,14 @@
 
 <table class="text-center">
   <tr class="h3 bg-dark text-white">
-    <td colspan="4">自分のコメント一覧</td>
+    <td colspan="5">自分のコメント一覧</td>
   </tr>
   <tr class="bg-dark text-white h5 table-bordered border-dark">
     <th>　日時　</th>
     <th>　問題　</th>
     <th>　作問者　</th>
     <th>　コメント内容　</th>
+    <th></th>
   </tr>
   <% @comments_sent.each_slice(10) do |row| %>
     <% row.each do |comment| %>
@@ -19,6 +20,9 @@
         <td><%= comment.solved_problem.created_problem.problem %></td>
         <td><%= comment.solved_problem.created_problem.learner.name %></td>
         <td><%= comment.content %></td>
+        <td>
+          <%= link_to "コメントを削除する", comment_path(comment), method: :delete, class: 'btn btn-danger' %>
+        </td>
       </tr>
     <% end %>
   <% end %>
@@ -26,13 +30,14 @@
     <td colspan="number_of_columns">&nbsp;</td>
   </tr>
   <tr class="h3 bg-dark text-white">
-    <td colspan="4">届いたコメント一覧</td>
+    <td colspan="5">届いたコメント一覧</td>
   </tr>
   <tr class="bg-dark text-white h5 table-bordered border-dark">
     <th>　日時　</th>
     <th>　問題　</th>
     <th>　送り主　</th>
     <th>　コメント内容　</th>
+    <th></th>
   </tr>
   <% @comments_received.each_slice(10) do |row| %>
     <% row.each do |comment| %>
@@ -41,6 +46,9 @@
         <td><%= comment.solved_problem.created_problem.problem %></td>
         <td><%= comment.solved_problem.learner.name %></td>
         <td><%= comment.content %></td>
+        <td>
+          <%= link_to "コメントを削除する", comment_path(comment), method: :delete, class: 'btn btn-danger' %>
+        </td>
       </tr>
     <% end %>
   <% end %>
