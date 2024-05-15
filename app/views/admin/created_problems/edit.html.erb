@@ -2,8 +2,8 @@
   <h2 class="bg-warning text-white">投稿問題編集</h2>
 </div>
 
-<table>
-  <%= form_with model: @created_problem, url: admin_created_problem_path do |f| %>
+<%= form_with model: @created_problem, url: admin_created_problem_path do |f| %>
+  <table>
     <tr>
       <td class="text-right">
         <h4 class="d-inline-block bg-dark text-white">教科</h4>
@@ -66,5 +66,5 @@
         　<%= link_to "削除する", admin_created_problem_path, method: :delete, class: 'btn btn-danger' %>
       </td>
     </tr>
-  <% end %>
-</table>
+  </table>
+<% end %>

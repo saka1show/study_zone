@@ -2,8 +2,8 @@
   <h2 class="bg-primary text-white">登録情報変更</h2>
 </div>
 
-<table class="h5">
-  <%= form_with model: @learner, url: learner_path, method: :patch do |f| %>
+<%= form_with model: @learner, url: learner_path, method: :patch do |f| %>
+  <table class="h5">
     <tr>
       <div class="field">
         <td align="right">
@@ -42,13 +42,13 @@
         <input class="btn btn-primary" type="submit" value="変更する">
       </td>
     </tr>
-  <% end %>
-  <tr>
-    <td colspan="number_of_columns">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="right">
-      退会を希望する方は<%= link_to "こちら", learners_unsubscribe_path, class: 'link-underline' %>
-    </td>
-  </tr>
-</table>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="right">
+        退会を希望する方は<%= link_to "こちら", learners_unsubscribe_path, class: 'link-underline' %>
+      </td>
+    </tr>
+  </table>
+<% end %>

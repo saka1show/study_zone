@@ -7,11 +7,14 @@ class Public::CommentsController < ApplicationController
 
   def create
     @solved_problem = SolvedProblem.find(params[:solved_problem_id])
-    @comment = Comment.new(comment_params)
+    @comment = @solved_problem.comments.build(comment_params)
     @comment.learner_id = current_learner.id
-    @comment.solved_problem_id = @solved_problem.id
     if @comment.save
-      redirect_to solved_problems_correct_page_path(id: @solved_problem.id)
+      if @solved_problem.answer_status == true
+        redirect_to solved_problems_correct_page_path(id: @solved_problem.id)
+      else
+        redirect_to solved_problems_incorrect_page_path(id: @solved_problem.id)
+      end
     else
       render :create
     end
@@ -21,17 +24,20 @@ class Public::CommentsController < ApplicationController
     @solved_problem = SolvedProblem.find(params[:id])
     @comment = Comment.find_by(solved_problem_id: @solved_problem.id)
     if @comment.update(comment_params)
-      redirect_to solved_problems_correct_page_path(id: @solved_problem.id)
+      if @solved_problem.answer_status == true
+        redirect_to solved_problems_correct_page_path(id: @solved_problem.id)
+      else
+        redirect_to solved_problems_incorrect_page_path(id: @solved_problem.id)
+      end
     else
       render :update
     end
   end
 
   def destroy
-    @solved_problem = SolvedProblem.find(params[:id])
-    @comment = Comment.find_by(learner_id: current_learner.id, solved_problem_id: @solved_problem.id)
+    @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to solved_problems_correct_page_path(id: @solved_problem.id)
+    redirect_to request.referrer
   end
 
   private

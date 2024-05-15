@@ -3,18 +3,18 @@
 </div>
 <% if learner_signed_in? %>
   <div class="border border-5 bg-light pb-3">
-    <table>
-      <tr>
-        <td align="left">
-          <h4 class="bg-info text-white d-inline-block">検索欄</h4>
-        </td>
-      </tr>
-      <tr>
-        <td align="left", colspan="4">
-          検索条件は１つの場合その条件にのみ合致する投稿が表示され、2つ以上の場合は、複数条件に合致する投稿が表示されます。
-        </td>
-      </tr>
-      <%= form_with url: created_problems_path, method: :get do |f| %>
+    <%= form_with url: created_problems_path, method: :get do |f| %>
+      <table>
+        <tr>
+          <td align="left">
+            <h4 class="bg-info text-white d-inline-block">検索欄</h4>
+          </td>
+        </tr>
+        <tr>
+          <td align="left", colspan="4">
+            検索条件は１つの場合その条件にのみ合致する投稿が表示され、2つ以上の場合は、複数条件に合致する投稿が表示されます。
+          </td>
+        </tr>
         <tr>
           <td align="right", colspan="2">
             教科検索（選択肢より選んで下さい）
@@ -44,8 +44,8 @@
             <input class="btn btn-info" type="submit" value="検索する">
           </td>
         </tr>
-      <% end %>
-    </table>
+      </table>
+    <% end %>
   </div>
 
   <table class="table table-hover table-inverse">
