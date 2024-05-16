@@ -30,11 +30,15 @@ class Public::SessionsController < Devise::SessionsController
 
   def learner_state
     learner = Learner.find_by(email: params[:learner][:email])
-    return if learner.nil?
-    return unless learner.valid_password?(params[:learner][:password])
-    if learner.is_active == false
+    if learner.nil?
+      flash[:alert] = "Invalid email address"
+      redirect_to new_learner_session_path
+    elsif !learner.valid_password?(params[:learner][:password])
+      flash[:alert] = "Invalid password"
+      redirect_to new_learner_session_path
+    elsif !learner.is_active
+      flash[:alert] = "Your account is not activated yet"
       redirect_to new_learner_registration_path
-    else
     end
   end
 

@@ -68,11 +68,11 @@
         <div class="row sidebar-table">
             <% if CreatedProblem.exists? %>
               <h5><strong>投稿された最新問題</strong></h5>
-              <%= CreatedProblem.order(created_at: :desc).first.problem %></br></br>
+              <%= CreatedProblem.where(delete_status: false).order(created_at: :desc).first.problem %></br></br>
               <h5><strong>作問者</strong></h5>
-              <%= CreatedProblem.order(created_at: :desc).first.learner.name %></br></br>
+              <%= CreatedProblem.where(delete_status: false).order(created_at: :desc).first.learner.name %></br></br>
               <h5><strong>教科</strong></h5>
-              <%= CreatedProblem.order(created_at: :desc).first.subject.subject_name %>
+              <%= CreatedProblem.where(delete_status: false).order(created_at: :desc).first.subject.subject_name %>
             <% end %>
         </div>
       </div>
