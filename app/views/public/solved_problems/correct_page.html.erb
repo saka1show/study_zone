@@ -2,6 +2,12 @@
   <h2 class="bg-primary text-white">解答結果：正解</h2>
 </div>
 
+<% if flash[:alert].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <table>
   <tr class="text-center">
     <td colspan="2">
