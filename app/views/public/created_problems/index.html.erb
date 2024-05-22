@@ -1,6 +1,13 @@
 <div class="d-inline-block">
   <h2 class="bg-primary text-white">投稿問題一覧</h2>
 </div>
+
+<% if flash[:notice].present? %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <% if learner_signed_in? %>
   <div class="border border-5 bg-light pb-3">
     <%= form_with url: created_problems_path, method: :get do |f| %>

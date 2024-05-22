@@ -51,6 +51,7 @@ class Public::SolvedProblemsController < ApplicationController
       @point.owner = true
     end
     if @solved_problem.answer.blank? || @solved_problem.answer == "UnKnOwN"
+      flash.now[:alert] = "解答の送信に失敗しました"
       render :new
     end
   end
@@ -67,6 +68,7 @@ class Public::SolvedProblemsController < ApplicationController
     if @solved_problem.update(solved_problem_params)
       redirect_to solved_problems_answer_path(created_problem_id: @created_problem.id)
     else
+      flash.now[:alert] = "解答の送信に失敗しました"
       render :new
     end
   end
@@ -163,6 +165,7 @@ class Public::SolvedProblemsController < ApplicationController
     created_problem = CreatedProblem.find(params[:id])
     solved_problems = SolvedProblem.where(created_problem_id: created_problem.id, learner_id: current_learner.id)
     solved_problems.update(solved_problem_params)
+    flash[:notice] = "正しく処理されました"
     redirect_to created_problems_all_path
   end
 

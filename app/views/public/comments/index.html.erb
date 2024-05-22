@@ -2,6 +2,12 @@
   <h2 class="bg-primary text-white">コメント履歴</h2>
 </div>
 
+<% if flash[:notice].present? %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <table class="text-center">
   <tr class="h3 bg-dark text-white">
     <td colspan="5">自分のコメント一覧</td>

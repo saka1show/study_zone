@@ -39,6 +39,7 @@ class Public::CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
+    flash[:notice] = "正しく処理されました"
     redirect_to request.referrer
   end
 

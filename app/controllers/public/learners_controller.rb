@@ -20,8 +20,13 @@ class Public::LearnersController < ApplicationController
 
   def update
     learner = current_learner
-    learner.update(learner_params)
-    redirect_to learner_path
+    if learner.update(learner_params)
+      flash[:notice] = "正しく処理されました"
+      redirect_to learner_path
+    else
+      flash.now[:alert] = "登録情報の更新に失敗しました"
+      render :edit
+    end
   end
 
   def unsubscribe
@@ -32,6 +37,7 @@ class Public::LearnersController < ApplicationController
     learner = current_learner
     learner.update(is_active: false)
     reset_session
+    flash[:notice] = "ご利用ありがとうございました"
     redirect_to root_path
   end
 

@@ -10,7 +10,7 @@ class Public::CreatedProblemsController < ApplicationController
     if @created_problem.save
       redirect_to created_problem_path(@created_problem.id)
     else
-      puts @created_problem.errors.full_messages
+      flash.now[:alert] = "問題の作成に失敗しました"
       render :new
     end
   end
@@ -81,9 +81,10 @@ class Public::CreatedProblemsController < ApplicationController
   def update
     @created_problem = CreatedProblem.find(params[:id])
     if @created_problem.update(created_problem_params)
+      flash[:notice] = "正しく処理されました"
       redirect_to created_problems_path
     else
-      logger.error @created_problem.errors.full_messages
+      flash.now[:alert] = "問題の更新に失敗しました"
       render :edit
     end
   end

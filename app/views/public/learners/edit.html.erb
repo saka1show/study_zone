@@ -2,6 +2,12 @@
   <h2 class="bg-primary text-white">登録情報変更</h2>
 </div>
 
+<% if flash[:alert].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <%= form_with model: @learner, url: learner_path, method: :patch do |f| %>
   <table class="h5">
     <tr>

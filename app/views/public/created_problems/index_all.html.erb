@@ -8,6 +8,12 @@
   </div>
 <% end %>
 
+<% if flash[:notice].present? %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <div class="border border-5 bg-light pb-3">
   <%= form_with url: created_problems_all_path, method: :get do |f| %>
     <table>
