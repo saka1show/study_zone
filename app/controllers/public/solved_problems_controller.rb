@@ -50,6 +50,9 @@ class Public::SolvedProblemsController < ApplicationController
       @point.point = 1
       @point.owner = true
     end
+    if @solved_problem.answer.blank? || @solved_problem.answer == "UnKnOwN"
+      render :new
+    end
   end
 
   def reanswer
@@ -64,7 +67,7 @@ class Public::SolvedProblemsController < ApplicationController
     if @solved_problem.update(solved_problem_params)
       redirect_to solved_problems_answer_path(created_problem_id: @created_problem.id)
     else
-      render :answer
+      render :new
     end
   end
 
@@ -74,14 +77,14 @@ class Public::SolvedProblemsController < ApplicationController
       if @solved_problem.save
         redirect_to solved_problems_correct_page_path(id: @solved_problem.id)
       else
-        render :correct
+        render :answer
       end
     else
       if SolvedProblem.exists?(created_problem_id: @solved_problem.created_problem_id, learner_id: current_learner.id)
         if @solved_problem.save
           redirect_to solved_problems_correct_page_path(id: @solved_problem.id)
         else
-          render :correct
+          render :answer
         end
       elsif learner_signed_in?
         @point = @solved_problem.points.build
@@ -92,7 +95,7 @@ class Public::SolvedProblemsController < ApplicationController
         if @solved_problem.save && @point.save
           redirect_to solved_problems_correct_page_path(id: @solved_problem)
         else
-          render :correct
+          render :answer
         end
       else
       end
@@ -104,7 +107,7 @@ class Public::SolvedProblemsController < ApplicationController
       if @solved_problem.update(solved_problem_params)
         redirect_to solved_problems_correct_page_path(id: @solved_problem)
       else
-        render :re_correct
+        render :answer
       end
   end
 
@@ -113,7 +116,7 @@ class Public::SolvedProblemsController < ApplicationController
     if @solved_problem.save
       redirect_to solved_problems_incorrect_page_path(id: @solved_problem)
     else
-      render :incorrect
+      render :answer
     end
   end
 
@@ -122,7 +125,7 @@ class Public::SolvedProblemsController < ApplicationController
       if @solved_problem.update(solved_problem_params)
         redirect_to solved_problems_incorrect_page_path(id: @solved_problem)
       else
-        render :re_correct
+        render :answer
       end
   end
 

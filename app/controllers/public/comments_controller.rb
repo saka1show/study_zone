@@ -15,8 +15,9 @@ class Public::CommentsController < ApplicationController
       else
         redirect_to solved_problems_incorrect_page_path(id: @solved_problem.id)
       end
+      flash.delete(:notice)
     else
-      render :create
+      flash[:alert] = "コメントの保存に失敗しました。もう一度お試しください。"
     end
   end
 
@@ -29,8 +30,9 @@ class Public::CommentsController < ApplicationController
       else
         redirect_to solved_problems_incorrect_page_path(id: @solved_problem.id)
       end
+      flash.delete(:notice)
     else
-      render :update
+      flash[:alert] = "コメントの保存に失敗しました。もう一度お試しください。"
     end
   end
 

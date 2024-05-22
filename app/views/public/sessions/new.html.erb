@@ -3,6 +3,7 @@
 </div>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= render "public/shared/error_messages", resource: resource %>
   <table class="h5">
     <tr>
       <div class="field">

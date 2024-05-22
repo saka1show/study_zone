@@ -107,7 +107,7 @@
         <td><%= comment.solved_problem.created_problem.learner.name %></td>
         <td><%= comment.content %></td>
         <td>
-          <%= link_to "コメントを削除する", admin_comment_path(comment), method: :delete, class: 'btn btn-danger' %>
+          <%= link_to "コメントを削除する", admin_comment_path(comment), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>
@@ -133,7 +133,7 @@
         <td><%= comment.solved_problem.learner.name %></td>
         <td><%= comment.content %></td>
         <td>
-          <%= link_to "コメントを削除する", admin_comment_path(comment), method: :delete, class: 'btn btn-danger' %>
+          <%= link_to "コメントを削除する", admin_comment_path(comment), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>

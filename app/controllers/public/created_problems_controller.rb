@@ -83,6 +83,7 @@ class Public::CreatedProblemsController < ApplicationController
     if @created_problem.update(created_problem_params)
       redirect_to created_problems_path
     else
+      logger.error @created_problem.errors.full_messages
       render :edit
     end
   end
