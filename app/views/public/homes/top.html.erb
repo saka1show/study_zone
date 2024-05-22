@@ -1,3 +1,9 @@
+<% if flash[:notice].present? %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <div class="h2 text-center pt-4">
   <p class="pt-4">ようこそ、Study Zoneへ！</br></p>
   <p class="pt-4">このサイトでは、</br></p>

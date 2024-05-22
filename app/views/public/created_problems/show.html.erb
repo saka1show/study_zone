@@ -58,7 +58,7 @@
     </tr>
   </table>
 
-  <%= form_with model: @solved_problem, url: solved_problem_path, method: :patch do |f| %>
+  <%= form_with model: @solved_problem, url: solved_problem_path, method: :patch, data: {confirm: "本当に削除しますか？"} do |f| %>
     <table class="table table-hover table-inverse">
       <tr class="table-bordered border-dark">
         <td align="right", colspan="2">

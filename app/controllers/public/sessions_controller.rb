@@ -31,13 +31,13 @@ class Public::SessionsController < Devise::SessionsController
   def learner_state
     learner = Learner.find_by(email: params[:learner][:email])
     if learner.nil?
-      flash[:alert] = "Invalid email address"
+      flash[:alert] = "メールアドレスまたはパスワードが正しくありません"
       redirect_to new_learner_session_path
     elsif !learner.valid_password?(params[:learner][:password])
-      flash[:alert] = "Invalid password"
+      flash[:alert] = "メールアドレスまたはパスワードが正しくありません"
       redirect_to new_learner_session_path
     elsif !learner.is_active
-      flash[:alert] = "Your account is not activated yet"
+      flash[:alert] = "退会済みユーザーのため再度新規登録を行なってください"
       redirect_to new_learner_registration_path
     end
   end

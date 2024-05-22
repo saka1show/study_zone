@@ -1,6 +1,13 @@
 <div class="d-inline-block">
   <h2 class="bg-primary text-white">問題新規投稿</h2>
 </div>
+
+<% if flash[:alert].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <% if learner_signed_in? %>
   <%= form_with model: @created_problem, url: created_problems_path, method: :post do |f| %>
     <table>
@@ -20,7 +27,7 @@
           <h4 class="d-inline-block bg-dark text-white">問題</h4>
         </td>
         <td class="text-left">
-          　<%= f.text_field :problem, placeholder: '問題を入力', style: 'width: 400px; height: 100px;' %>
+          　<%= f.text_field :problem, placeholder: '問題を入力（1文字以上255字以内）', style: 'width: 400px; height: 100px;' %>
         </td>
       </tr>
       <tr>
@@ -31,7 +38,7 @@
           <h4 class="d-inline-block bg-dark text-white">模範解答</h4>
         </td>
         <td class="text-left">
-          　<%= f.text_field :model_answer, placeholder: '模範解答を入力' %>
+          　<%= f.text_field :model_answer, placeholder: '模範解答を入力（1文字以上100字以内）', style: 'width: 400px; height: 50px;' %>
         </td>
       </tr>
       <tr>
@@ -42,7 +49,7 @@
           <h4 class="d-inline-block bg-dark text-white">解説</h4>
         </td>
         <td class="text-left">
-          　<%= f.text_field :explanation, placeholder: '解説を入力', style: 'width: 400px; height: 100px;' %>
+          　<%= f.text_field :explanation, placeholder: '解説を入力（1文字以上255字以内）', style: 'width: 400px; height: 100px;' %>
         </td>
       </tr>
       <tr>

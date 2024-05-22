@@ -1,6 +1,13 @@
 <div class="d-inline-block">
   <h2 class="bg-primary text-white">問題解答</h2>
 </div>
+
+<% if flash[:alert].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <% if SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner&.id, answer_deleted: false) %>
   <div class="text-center h3">
     この問題は解答済みです。</br>
