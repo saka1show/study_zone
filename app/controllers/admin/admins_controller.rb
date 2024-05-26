@@ -9,9 +9,14 @@ class Admin::AdminsController < ApplicationController
   end
 
   def update
-    admin = current_admin
-    admin.update(admin_params)
-    redirect_to admin_admin_path
+    @admin = current_admin
+    if @admin.update(admin_params)
+      flash[:notice] = "正しく処理されました"
+      redirect_to admin_admin_path
+    else
+      flash.now[:alert] = "登録情報の更新に失敗しました"
+      render :edit
+    end
   end
 
   def unsubscribe
@@ -22,6 +27,7 @@ class Admin::AdminsController < ApplicationController
     admin = current_admin
     admin.update(is_active: false)
     reset_session
+    flash[:notice] = "ご利用ありがとうございました"
     redirect_to root_path
   end
 

@@ -19,8 +19,8 @@ class Public::LearnersController < ApplicationController
   end
 
   def update
-    learner = current_learner
-    if learner.update(learner_params)
+    @learner = current_learner
+    if @learner.update(learner_params)
       flash[:notice] = "正しく処理されました"
       redirect_to learner_path
     else

@@ -2,6 +2,12 @@
   <h2 class="bg-warning text-white">管理者マイページ</h2>
 </div>
 
+<% if flash[:notice].present? %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <table>
   <tr>
     <td align="right", class="h3">管理者名</td>

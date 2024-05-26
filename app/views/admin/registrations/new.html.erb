@@ -2,8 +2,15 @@
   <h2 class="bg-warning">管理者新規登録</h2>
 </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 <%= render "admin/shared/error_messages", resource: resource %>
+
+<% if flash[:alert].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <table class="h5">
     <tr>
       <div class="field">

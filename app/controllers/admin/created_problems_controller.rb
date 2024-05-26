@@ -55,8 +55,10 @@ class Admin::CreatedProblemsController < ApplicationController
   def update
     @created_problem = CreatedProblem.find(params[:id])
     if @created_problem.update(created_problem_params)
+      flash[:notice] = "正しく処理されました"
       redirect_to admin_created_problem_path(@created_problem)
     else
+      flash.now[:alert] = "問題の更新に失敗しました"
       render :edit
     end
   end
