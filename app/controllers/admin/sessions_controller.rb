@@ -30,9 +30,14 @@ class Admin::SessionsController < Devise::SessionsController
 
   def admin_state
     admin = Admin.find_by(email: params[:admin][:email])
-    return if admin.nil?
-    return unless admin.valid_password?(params[:admin][:password])
-    if admin.is_active == false
+    if admin.nil?
+      flash[:alert] = "メールアドレスまたはパスワードが正しくありません"
+      redirect_to new_admin_session_path
+    elsif !admin.valid_password?(params[:admin][:password])
+      flash[:alert] = "メールアドレスまたはパスワードが正しくありません"
+      redirect_to new_admin_session_path
+    elsif !admin.is_active == false
+      flash[:alert] = "退会済みユーザーのため再度新規登録を行なってください"
       redirect_to new_admin_registration_path
     else
     end

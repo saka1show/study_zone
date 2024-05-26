@@ -24,6 +24,10 @@ class Admin::SubjectsController < ApplicationController
 
   def update
     @subject = Subject.find(params[:id])
+    if subject_params[:subject_name].blank?
+      flash[:alert] = "教科名が空欄です"
+      redirect_to edit_admin_subject_path and return
+    end
     if @subject.update(subject_params)
       redirect_to admin_subjects_path
     else

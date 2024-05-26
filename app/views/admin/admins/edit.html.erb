@@ -2,7 +2,13 @@
   <h2 class="bg-warning text-white">管理者登録情報変更</h2>
 </div>
 
-<%= form_with model: @admin, url: admin_admin_path, method: :patch do |f| %>
+<% if flash[:alert].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<%= form_with model: @admin, url: admin_admin_path(@admin), method: :patch do |f| %>
   <table class="h5">
     <tr>
       <div class="field">

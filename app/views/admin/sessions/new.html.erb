@@ -2,6 +2,12 @@
   <h2 class="bg-warning">管理者ログイン</h2>
 </div>
 
+<% if flash[:alert].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <table class="h5">
     <tr>

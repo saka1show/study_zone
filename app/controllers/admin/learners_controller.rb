@@ -26,9 +26,14 @@ class Admin::LearnersController < ApplicationController
   end
 
   def update
-    learner = Learner.find(params[:id])
-    learner.update(learner_params)
-    redirect_to admin_learner_path
+    @learner = Learner.find(params[:id])
+    if @learner.update(learner_params)
+      flash[:notice] = "正しく処理されました"
+      redirect_to admin_learner_path
+    else
+      flash.now[:alert] = "登録情報の更新に失敗しました"
+      render :edit
+    end
   end
 
   def learner_params

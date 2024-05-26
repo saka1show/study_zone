@@ -2,6 +2,12 @@
   <h2 class="bg-warning text-white">学習者詳細</h2>
 </div>
 
+<% if flash[:notice].present? %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <table>
   <tr>
     <td align="right", class="h3">ニックネーム</td>
