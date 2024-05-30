@@ -1,5 +1,4 @@
 class Public::LearnersController < ApplicationController
-
   def show
     @learner = current_learner
 
@@ -42,9 +41,7 @@ class Public::LearnersController < ApplicationController
   end
 
   private
-
-  def learner_params
-    params.require(:learner).permit(:name, :name_kana, :email, :encrypted_password)
-  end
-
+    def learner_params
+      params.require(:learner).permit(:name, :name_kana, :email, :encrypted_password)
+    end
 end

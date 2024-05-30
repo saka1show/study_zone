@@ -1,5 +1,4 @@
 class Public::FavoritesController < ApplicationController
-
   def create
     created_problem = CreatedProblem.find(params[:created_problem_id])
     solved_problem = created_problem.solved_problems.first
@@ -29,5 +28,4 @@ class Public::FavoritesController < ApplicationController
     solved_problem_id = created_problem.solved_problems.first.id
     redirect_to solved_problems_correct_page_path(id: solved_problem_id)
   end
-
 end

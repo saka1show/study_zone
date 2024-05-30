@@ -1,5 +1,4 @@
 class Admin::LearnersController < ApplicationController
-
   def index
     @learners = Learner.all
   end
@@ -39,5 +38,4 @@ class Admin::LearnersController < ApplicationController
   def learner_params
     params.require(:learner).permit(:name, :name_kana, :email, :is_active)
   end
-
 end
