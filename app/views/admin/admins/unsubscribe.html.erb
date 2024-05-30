@@ -1,0 +1,16 @@
+<div class="d-inline-block">
+  <h2 class="bg-warning text-white">退会確認画面</h2>
+</div>
+
+<table>
+  <tr>
+    <td colspan="2", class="text-center h2">本当に退会しますか？</td>
+  </tr>
+  <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+  <tr class="text-center">
+    <td><%= link_to "いいえ", admin_admin_path(current_admin), class:"btn btn-warning" %></td>
+    <td><%= link_to "退会する", admin_admin_withdraw_path, method: :patch, class:"btn btn-danger" %></td>
+  </tr>
+</table>

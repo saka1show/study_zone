@@ -1,0 +1,24 @@
+<div class="d-inline-block">
+  <h2 class="bg-warning text-white">学習者一覧</h2>
+</div>
+<table class="table table-hover table-inverse">
+  <tr class="bg-dark text-white h5 table-bordered border-dark">
+    <th style="text-align: center;">ＩＤ</th>
+    <th style="text-align: center;">ニックネーム</th>
+    <th colspan="2">ステータス</th>
+  </tr>
+  <% @learners.each_slice(5) do |row| %>
+    <% row.each do |learner| %>
+    <tr>
+      <td><%= learner.id %></td>
+      <td><%= learner.name %></td>
+      <td><% if learner.is_active == true %>
+    有効会員</br>
+  <% else %>
+    退会済</br>
+  <% end %></br></td>
+      <td><%= link_to "詳細", admin_learner_path(learner.id), class: "btn btn-success" %></td>
+    </tr>
+    <% end %>
+  <% end %>
+</table>

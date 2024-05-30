@@ -1,0 +1,72 @@
+<div class="d-inline-block">
+  <h2 class="bg-primary text-white">問題新規投稿</h2>
+</div>
+
+<% if flash[:alert].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<% if learner_signed_in? %>
+  <%= form_with model: @created_problem, url: created_problems_path, method: :post do |f| %>
+    <table>
+      <tr>
+        <td class="text-right">
+          <h4 class="d-inline-block bg-dark text-white">教科</h4>
+        </td>
+        <td class="text-left">
+          　<%= f.select :subject_id, options_from_collection_for_select(Subject.all, :id, :subject_name) %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="number_of_columns">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <h4 class="d-inline-block bg-dark text-white">問題</h4>
+        </td>
+        <td class="text-left">
+          　<%= f.text_field :problem, placeholder: '問題を入力（1文字以上255字以内）', style: 'width: 400px; height: 100px;' %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="number_of_columns">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <h4 class="d-inline-block bg-dark text-white">模範解答</h4>
+        </td>
+        <td class="text-left">
+          　<%= f.text_field :model_answer, placeholder: '模範解答を入力（1文字以上100字以内）', style: 'width: 400px; height: 50px;' %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="number_of_columns">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <h4 class="d-inline-block bg-dark text-white">解説</h4>
+        </td>
+        <td class="text-left">
+          　<%= f.text_field :explanation, placeholder: '解説を入力（1文字以上255字以内）', style: 'width: 400px; height: 100px;' %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="number_of_columns">&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="center", colspan="2">
+          <input class="btn btn-primary" type="submit" value="投稿する">
+        </td>
+      </tr>
+    </table>
+  <% end %>
+<% else %>
+  <div class="h2 text-center pt-5">
+    <p class="pt-4">問題新規投稿機能はログイン後に利用可能です。</p>
+    <p class="pt-4">ログインは<%= link_to "こちら", new_learner_session_path, class: 'link-underline' %></p>
+    <p class="pt-4">新規登録は<%= link_to "こちら", new_learner_registration_path, class: 'link-underline' %></p>
+  </div>
+<% end %>
+

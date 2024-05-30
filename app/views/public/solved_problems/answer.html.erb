@@ -1,0 +1,136 @@
+<div class="d-inline-block">
+  <h2 class="bg-primary text-white">解答確認</h2>
+</div>
+
+<% if learner_signed_in? %>
+  <table>
+    <tr>
+      <td colspan="2", class="text-center">
+        <h4 class="d-inline-block bg-dark text-white">自分の解答</h4>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="2", class="text-center">
+        <h5><%= @solved_problem.answer %></h5>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="2", class="text-center">
+        <h4 class="d-inline-block bg-dark text-white">模範解答</h4>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="2", class="text-center">
+        <h5><%= @created_problem.model_answer %></h5>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+  </table>
+
+  <div class="row">
+    <div class="col-4">
+    </div>
+    <% if SolvedProblem.exists?(created_problem_id: @created_problem.id, learner_id: current_learner.id) %>
+      <div class="col-2">
+        <%= form_with model: @solved_problem, url: solved_problems_re_correct_path(id: @solved_problem) do |f| %>
+          <%= f.hidden_field :answer_deleted, :value => false %>
+          <%= f.hidden_field :answer_status , :value => true %>
+          <% f.fields_for :point do |point_form| %>
+            <%= point_form.hidden_field :learner_id, value: current_learner.id %>
+            <%= point_form.hidden_field :solved_problem_id, value: @solved_problem.id %>
+            <%= point_form.hidden_field :point, value: 1 %>
+            <%= point_form.hidden_field :owner, value: true %>
+          <% end %>
+          <input class="btn btn-success" type="submit" value="正解した">
+        <% end %>
+      </div>
+      <div class="col-4">
+        <%= form_with model: @solved_problem, url: solved_problems_re_incorrect_path(id: @solved_problem) do |f| %>
+          <%= f.hidden_field :answer_deleted, :value => false %>
+          　　<input class="btn btn-danger" type="submit" value="不正解だった">
+        <% end %>
+      </div>
+    <% else %>
+      <div class="col-2">
+        <%= form_with model: @solved_problem, url: solved_problems_correct_path do |f| %>
+          <%= f.hidden_field :learner_id, :value => current_learner.id %>
+          <%= f.hidden_field :created_problem_id, :value => @created_problem.id %>
+          <%= f.hidden_field :answer , :value => @solved_problem.answer %>
+          <%= f.hidden_field :answer_status , :value => true %>
+          <%= f.hidden_field :answer_deleted, :value => false %>
+          <% f.fields_for :point do |point_form| %>
+            <%= point_form.hidden_field :learner_id, value: current_learner.id %>
+            <%= point_form.hidden_field :solved_problem_id, value: @solved_problem.id %>
+            <%= point_form.hidden_field :point, value: 1 %>
+            <%= point_form.hidden_field :owner, value: true %>
+          <% end %>
+          <input class="btn btn-success" type="submit" value="正解した">
+        <% end %>
+      </div>
+      <div class="col-4">
+        <%= form_with model: @solved_problem, url: solved_problems_incorrect_path do |f| %>
+          <%= f.hidden_field :learner_id, :value => current_learner.id %>
+          <%= f.hidden_field :created_problem_id, :value => @created_problem.id %>
+          <%= f.hidden_field :answer , :value => @solved_problem.answer %>
+          <%= f.hidden_field :answer_status , :value => false %>
+          <%= f.hidden_field :answer_deleted, :value => false %>
+          　　<input class="btn btn-danger" type="submit" value="不正解だった">
+        <% end %>
+      </div>
+    <% end %>
+    <div class="col-2">
+    </div>
+  </div>
+<% else %>
+  <table>
+    <tr>
+      <td class="text-center">
+        <h4 class="d-inline-block bg-dark text-white">自分の解答</h4>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="text-center">
+        <h5><%= @solved_problem.answer %></h5>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="text-center">
+        <h4 class="d-inline-block bg-dark text-white">模範解答</h4>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="text-center">
+        <h5><%= @created_problem.model_answer %></h5>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>
+        <%= link_to "正解", solved_problems_correct_page_path(created_problem_id: @created_problem.id), class: "btn btn-success" %>
+        　　<%= link_to "不正解", solved_problems_incorrect_page_path(created_problem_id: @created_problem.id), class: "btn btn-danger" %>
+      </td>
+    </tr>
+  </table>
+<% end %>

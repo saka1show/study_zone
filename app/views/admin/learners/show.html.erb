@@ -1,0 +1,147 @@
+<div class="d-inline-block">
+  <h2 class="bg-warning text-white">学習者詳細</h2>
+</div>
+
+<% if flash[:notice].present? %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<table>
+  <tr>
+    <td align="right", class="h3">ニックネーム</td>
+    <td align="left", class="h4">　<%= @learner.name %>さん</td>
+  </tr>
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right", class="h3">ステータス</td>
+    <td align="left", class="h4">
+      <% if @learner.is_active == true %>
+        　有効会員
+      <% else %>
+        　退会済
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right", class="h3">現在のレベル</td>
+    <td align="left", class="h4">
+      <% if @point_all <= 4 %>
+        　１
+      <% elsif @point_all <= 24 %>
+        　２
+      <% elsif @point_all <= 49 %>
+        　３
+      <% elsif @point_all <= 74 %>
+        　４
+      <% elsif @point_all <= 99 %>
+        　５
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td align="right", class="h3">今日獲得したポイント</td>
+    <td align="left", class="h4">　　<%= @point_today %>pt</td>
+  </tr>
+  <tr>
+    <td align="right", class="h3">今月獲得したポイント</td>
+    <td align="left", class="h4">　　<%= @point_this_month %>pt</td>
+  </tr>
+  <tr>
+    <td align="right", class="h3">累計獲得ポイント</td>
+    <td align="left", class="h4">　　<%= @point_all %>pt</td>
+  </tr>
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <tr>
+    <td  align="right", colspan="2">
+      <%= link_to "学習者情報の編集", edit_admin_learner_path(@learner.id), class: 'btn btn-warning' %>
+    </td>
+  </tr>
+</table>
+
+<table class="text-center">
+  <tr class="h3 bg-dark text-white">
+    <td colspan="3", align="center">
+      <%= @learner.name %>さんが作成した最新問題
+    </td>
+  </tr>
+  <tr class="bg-dark text-white h4">
+    <th>教科</th>
+    <th>問題</th>
+    <th></th>
+  </tr>
+  <% @created_problems.each_slice(5) do |row| %>
+    <% row.each do |created_problem| %>
+    <tr>
+      <td>　<%= created_problem.subject.subject_name %>　</td>
+      <td><%= created_problem.problem %></td>
+      <td>　<%= link_to "詳細", admin_created_problem_path(created_problem.id), class: 'btn btn-success' %>　</td>
+    </tr>
+    <% end %>
+  <% end %>
+  <tr>
+    <td>
+      <%= paginate @created_problems %>
+    </td>
+  </tr>
+</table>
+
+<table class="text-center">
+  <tr class="h3 bg-dark text-white">
+    <td colspan="5"><%= @learner.name %>さんが送ったコメント</td>
+  </tr>
+  <tr class="bg-dark text-white h5 table-bordered border-dark">
+    <th>　日時　</th>
+    <th>　問題　</th>
+    <th>　作問者　</th>
+    <th>　コメント内容　</th>
+    <th></th>
+  </tr>
+  <% @comments_sent.each_slice(5) do |row| %>
+    <% row.each do |comment| %>
+      <tr class="table-bordered border-dark">
+        <td><%= comment.created_at.strftime("%Y/%m/%d　%H:%M") %></td>
+        <td><%= comment.solved_problem.created_problem.problem %></td>
+        <td><%= comment.solved_problem.created_problem.learner.name %></td>
+        <td><%= comment.content %></td>
+        <td>
+          <%= link_to "コメントを削除する", admin_comment_path(comment), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+  <tr>
+    <td colspan="number_of_columns">&nbsp;</td>
+  </tr>
+  <tr class="h3 bg-dark text-white">
+    <td colspan="5"><%= @learner.name %>さんに届いたコメント一覧</td>
+  </tr>
+  <tr class="bg-dark text-white h5 table-bordered border-dark">
+    <th>　日時　</th>
+    <th>　問題　</th>
+    <th>　送り主　</th>
+    <th>　コメント内容　</th>
+    <th></th>
+  </tr>
+  <% @comments_received.each_slice(5) do |row| %>
+    <% row.each do |comment| %>
+      <tr class="table-bordered border-dark">
+        <td><%= comment.created_at.strftime("%Y/%m/%d　%H:%M") %></td>
+        <td><%= comment.solved_problem.created_problem.problem %></td>
+        <td><%= comment.solved_problem.learner.name %></td>
+        <td><%= comment.content %></td>
+        <td>
+          <%= link_to "コメントを削除する", admin_comment_path(comment), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

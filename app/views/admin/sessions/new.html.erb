@@ -1,0 +1,59 @@
+<div class="d-inline-block">
+  <h2 class="bg-warning">管理者ログイン</h2>
+</div>
+
+<% if flash[:alert].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <table class="h5">
+    <tr>
+      <div class="field">
+        <td align="right">
+          <%= f.label :"メールアドレス" %>
+          　　<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <div class="field">
+        <td align="right">
+          <%= f.label :"パスワード" %>
+          　　<%= f.password_field :password, autocomplete: "current-password" %>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <td align="right">
+            <%= f.check_box :remember_me %>
+            <%= f.label :"パスワードを記憶する" %>
+          </td>
+        </div>
+      <% end %>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center">
+        <input class="btn btn-warning" type="submit" value="ログイン">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="number_of_columns">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="right">
+        新規登録をされる方は<%= link_to "こちら", new_admin_registration_path, class: 'link-underline' %>
+      </td>
+    </tr>
+  </table>
+<% end %>
