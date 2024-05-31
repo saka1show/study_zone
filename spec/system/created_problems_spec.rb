@@ -3,7 +3,10 @@
 require 'rails_helper'
 
 describe '投稿のテスト' do
-  let!(:created_problem) { create(:created_problem, problem:'テスト問題',model_answer:'test',explanation:'これはテスト問題です') }
+  before(:all) do
+    Rails.application.load_seed
+  end
+  
   describe 'トップ画面のテスト'
     before do
       visit root_path

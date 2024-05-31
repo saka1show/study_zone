@@ -62,4 +62,9 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include FactoryBot::Syntax::Methods
+
+  # テスト実行前にシードデータをロード
+  config.before(:suite) do
+    Rails.application.load_seed # Seedデータを読み込む
+  end
 end

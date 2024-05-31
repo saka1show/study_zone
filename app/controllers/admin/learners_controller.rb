@@ -8,12 +8,12 @@ class Admin::LearnersController < ApplicationController
     @created_problems = CreatedProblem.where(learner_id: @learner.id).order(created_at: :desc).page(params[:page]).per(5)
 
     # 動作確認用
-    @point_today = Point.where(learner_id: @learner.id).where(created_at: Date.today.beginning_of_day..Date.today.end_of_day).count
-    @point_this_month = Point.where(learner_id: @learner.id).where(created_at: Date.today.beginning_of_month..Date.today.end_of_month).count
+    # @point_today = Point.where(learner_id: @learner.id).where(created_at: Date.today.beginning_of_day..Date.today.end_of_day).count
+    # @point_this_month = Point.where(learner_id: @learner.id).where(created_at: Date.today.beginning_of_month..Date.today.end_of_month).count
 
     # デプロイ用
-    # @point_today = Point.where(learner_id: @learner.id).where("DATE_FORMAT(created_at, '%Y-%m-%d') = ?", Date.today).count
-    # @point_this_month = Point.where(learner_id: @learner.id).where("DATE_FORMAT(created_at, '%Y-%m') = ?", Date.today).count
+    @point_today = Point.where(learner_id: @learner.id).where("DATE_FORMAT(created_at, '%Y-%m-%d') = ?", Date.today).count
+    @point_this_month = Point.where(learner_id: @learner.id).where("DATE_FORMAT(created_at, '%Y-%m') = ?", Date.today).count
 
     @point_all = Point.where(learner_id: @learner.id).count
     @comments_sent = Comment.where(learner_id: @learner.id)
