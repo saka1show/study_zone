@@ -1,5 +1,4 @@
 class Public::CommentsController < ApplicationController
-
   def index
     @comments_sent = Comment.where(learner_id: current_learner.id)
     @comments_received = Comment.joins(solved_problem: :created_problem).where(created_problems: { learner_id: current_learner.id })
@@ -44,9 +43,7 @@ class Public::CommentsController < ApplicationController
   end
 
   private
-
-  def comment_params
-    params.require(:comment).permit(:content, :learner_id, :solved_problem_id)
-  end
-
+    def comment_params
+      params.require(:comment).permit(:content, :learner_id, :solved_problem_id)
+    end
 end

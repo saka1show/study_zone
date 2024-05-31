@@ -1,5 +1,4 @@
 class Public::CreatedProblemsController < ApplicationController
-
   def new
     @created_problem = CreatedProblem.new
   end
@@ -19,13 +18,13 @@ class Public::CreatedProblemsController < ApplicationController
     @subjects = Subject.all
     if learner_signed_in?
       if params[:problem].present? && params[:subject_name].present? && params[:is_release].present?
-        @created_problems = CreatedProblem.joins(:subject).where("problem LIKE ?", "%#{params[:problem]}%").where(subjects: { subject_name: params[:subject_name]}).where(is_release: params[:is_release]).where(learner_id: current_learner.id).where(delete_status: false).order(created_at: :desc)
+        @created_problems = CreatedProblem.joins(:subject).where("problem LIKE ?", "%#{params[:problem]}%").where(subjects: { subject_name: params[:subject_name] }).where(is_release: params[:is_release]).where(learner_id: current_learner.id).where(delete_status: false).order(created_at: :desc)
       elsif params[:problem].present? && params[:subject_name].present?
-        @created_problems = CreatedProblem.joins(:subject).where("problem LIKE ?", "%#{params[:problem]}%").where(subjects: { subject_name: params[:subject_name]}).where(learner_id: current_learner.id).where(delete_status: false).order(created_at: :desc)
+        @created_problems = CreatedProblem.joins(:subject).where("problem LIKE ?", "%#{params[:problem]}%").where(subjects: { subject_name: params[:subject_name] }).where(learner_id: current_learner.id).where(delete_status: false).order(created_at: :desc)
       elsif params[:problem].present? && params[:is_release].present?
         @created_problems = CreatedProblem.where("problem LIKE ?", "%#{params[:problem]}%").where(is_release: params[:is_release]).where(learner_id: current_learner.id).where(delete_status: false).order(created_at: :desc)
       elsif params[:subject_name].present? && params[:is_release].present?
-        @created_problems = CreatedProblem.joins(:subject).where(subjects: { subject_name: params[:subject_name]}).where(is_release: params[:is_release]).where(learner_id: current_learner.id).where(delete_status: false).order(created_at: :desc)
+        @created_problems = CreatedProblem.joins(:subject).where(subjects: { subject_name: params[:subject_name] }).where(is_release: params[:is_release]).where(learner_id: current_learner.id).where(delete_status: false).order(created_at: :desc)
       elsif params[:problem].present?
         @created_problems = CreatedProblem.where("problem LIKE ?", "%#{params[:problem]}%").where(learner_id: current_learner.id).where(delete_status: false).order(created_at: :desc)
       elsif params[:subject_name].present?
@@ -41,23 +40,23 @@ class Public::CreatedProblemsController < ApplicationController
 
   def index_all
     @subjects = Subject.all
-      if params[:problem].present? && params[:subject_name].present? && params[:name].present?
-        @created_problems = CreatedProblem.joins(:subject, :learner).where("problem LIKE ?", "%#{params[:problem]}%").where(subjects: { subject_name: params[:subject_name]}).where(learner: { name: params[:name]}).where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
-      elsif params[:problem].present? && params[:subject_name].present?
-        @created_problems = CreatedProblem.joins(:subject).where("problem LIKE ?", "%#{params[:problem]}%").where(subjects: { subject_name: params[:subject_name]}).where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
-      elsif params[:problem].present? && params[:name].present?
-        @created_problems = CreatedProblem.joins(:learner).where("problem LIKE ?", "%#{params[:problem]}%").where(learner: { name: params[:name]}).where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
-      elsif params[:subject_name].present? && params[:name].present?
-        @created_problems = CreatedProblem.joins(:subject, :learner).where(subjects: { subject_name: params[:subject_name]}).where(learner: { name: params[:name]}).where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
-      elsif params[:problem].present?
-        @created_problems = CreatedProblem.where("problem LIKE ?", "%#{params[:problem]}%").where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
-      elsif params[:subject_name].present?
-        @created_problems = CreatedProblem.joins(:subject).where(subjects: { subject_name: params[:subject_name] }).where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
-      elsif params[:name].present?
-        @created_problems = CreatedProblem.joins(:learner).where(learner: { name: params[:name]}).where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
-      else
-        @created_problems = CreatedProblem.where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
-      end
+    if params[:problem].present? && params[:subject_name].present? && params[:name].present?
+      @created_problems = CreatedProblem.joins(:subject, :learner).where("problem LIKE ?", "%#{params[:problem]}%").where(subjects: { subject_name: params[:subject_name] }).where(learner: { name: params[:name] }).where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
+    elsif params[:problem].present? && params[:subject_name].present?
+      @created_problems = CreatedProblem.joins(:subject).where("problem LIKE ?", "%#{params[:problem]}%").where(subjects: { subject_name: params[:subject_name] }).where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
+    elsif params[:problem].present? && params[:name].present?
+      @created_problems = CreatedProblem.joins(:learner).where("problem LIKE ?", "%#{params[:problem]}%").where(learner: { name: params[:name] }).where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
+    elsif params[:subject_name].present? && params[:name].present?
+      @created_problems = CreatedProblem.joins(:subject, :learner).where(subjects: { subject_name: params[:subject_name] }).where(learner: { name: params[:name] }).where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
+    elsif params[:problem].present?
+      @created_problems = CreatedProblem.where("problem LIKE ?", "%#{params[:problem]}%").where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
+    elsif params[:subject_name].present?
+      @created_problems = CreatedProblem.joins(:subject).where(subjects: { subject_name: params[:subject_name] }).where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
+    elsif params[:name].present?
+      @created_problems = CreatedProblem.joins(:learner).where(learner: { name: params[:name] }).where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
+    else
+      @created_problems = CreatedProblem.where(delete_status: false).where(is_release: true).page(params[:page]).per(10).order(created_at: :desc)
+    end
   end
 
   def show
@@ -90,9 +89,7 @@ class Public::CreatedProblemsController < ApplicationController
   end
 
   private
-
-  def created_problem_params
-    params.require(:created_problem).permit(:learner_id, :subject_id, :problem, :model_answer, :explanation, :is_release, :delete_status)
-  end
-
+    def created_problem_params
+      params.require(:created_problem).permit(:learner_id, :subject_id, :problem, :model_answer, :explanation, :is_release, :delete_status)
+    end
 end

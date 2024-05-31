@@ -1,5 +1,4 @@
 class Admin::AdminsController < ApplicationController
-
   def show
     @admin = current_admin
   end
@@ -32,9 +31,7 @@ class Admin::AdminsController < ApplicationController
   end
 
   private
-
-  def admin_params
-    params.require(:admin).permit(:name, :email)
-  end
-
+    def admin_params
+      params.require(:admin).permit(:name, :email)
+    end
 end

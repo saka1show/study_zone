@@ -13,7 +13,7 @@ class DeviseCreateAdmins < ActiveRecord::Migration[6.1]
 
       ## Rememberable
       t.datetime :remember_created_at
-      
+
       t.string :name, null: false
 
       ## Trackable

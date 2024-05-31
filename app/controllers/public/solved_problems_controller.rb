@@ -1,5 +1,4 @@
 class Public::SolvedProblemsController < ApplicationController
-
   def new
     created_problem_id = params[:created_problem_id]
     @created_problem = CreatedProblem.find(created_problem_id)
@@ -106,11 +105,11 @@ class Public::SolvedProblemsController < ApplicationController
 
   def re_correct
     @solved_problem = SolvedProblem.find(params[:id])
-      if @solved_problem.update(solved_problem_params)
-        redirect_to solved_problems_correct_page_path(id: @solved_problem)
-      else
-        render :answer
-      end
+    if @solved_problem.update(solved_problem_params)
+      redirect_to solved_problems_correct_page_path(id: @solved_problem)
+    else
+      render :answer
+    end
   end
 
   def incorrect
@@ -124,11 +123,11 @@ class Public::SolvedProblemsController < ApplicationController
 
   def re_incorrect
     @solved_problem = SolvedProblem.find(params[:id])
-      if @solved_problem.update(solved_problem_params)
-        redirect_to solved_problems_incorrect_page_path(id: @solved_problem)
-      else
-        render :answer
-      end
+    if @solved_problem.update(solved_problem_params)
+      redirect_to solved_problems_incorrect_page_path(id: @solved_problem)
+    else
+      render :answer
+    end
   end
 
   def correct_page
@@ -155,7 +154,7 @@ class Public::SolvedProblemsController < ApplicationController
 
   def index
     if params[:learner_id].present?
-      @solved_problems = SolvedProblem.joins(created_problem: :favorites).where(favorites: { learner_id: params[:learner_id]}).order(created_at: :desc)
+      @solved_problems = SolvedProblem.joins(created_problem: :favorites).where(favorites: { learner_id: params[:learner_id] }).order(created_at: :desc)
     else
       @solved_problems = SolvedProblem.where(learner_id: current_learner.id).where(answer_deleted: false).order(created_at: :desc)
     end
@@ -170,9 +169,7 @@ class Public::SolvedProblemsController < ApplicationController
   end
 
   private
-
-  def solved_problem_params
-    params.require(:solved_problem).permit(:answer, :answer_status, :learner_id, :created_problem_id, :answer_deleted, points_attributes: [:learner_id, :solved_problem_id, :point, :owner])
-  end
-
+    def solved_problem_params
+      params.require(:solved_problem).permit(:answer, :answer_status, :learner_id, :created_problem_id, :answer_deleted, points_attributes: [:learner_id, :solved_problem_id, :point, :owner])
+    end
 end
