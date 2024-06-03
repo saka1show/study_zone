@@ -1,7 +1,7 @@
 FactoryBot.define do
-  factory :subject do
+  factory :comment do
     association :learner
     association :solved_problem
-    content { Faker::Lorem.characters(number:1) }
+    content { Faker::Lorem.characters(number:2) }
   end
 end

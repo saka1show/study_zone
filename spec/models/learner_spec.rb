@@ -6,9 +6,9 @@ describe 'モデルのテスト' do
   before(:all) do
     Rails.application.load_seed
   end
-  
-  it "有効な投稿内容の場合は保存されるか" do
-    expect(FactoryBot.build(:created_problem)).to be_valid
+
+  it "有効なユーザーの場合は保存されるか" do
+    expect(FactoryBot.build(:learner)).to be_valid
   end
-  
+
 end
